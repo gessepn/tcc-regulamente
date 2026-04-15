@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <link rel="manifest" href="manifest.json" />
+    <title>RegulaMente - Perfis</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
+
+      :root {
+        --heat-opacity: 0.12;
+      }
+
+      html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        touch-action: none;
+        user-select: none;
+        background: linear-gradient(180deg, #eef7ff 0%, #f8fbff 100%);
+        font-family: "Varela Round", sans-serif;
+        text-align: center;
+      }
+
+      #splash-screen {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(180deg, #e8f4fd 0%, #f7fbff 100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+        transition: opacity 0.8s ease-in-out, visibility 0.8s;
+      }
+
+      .logo-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .simbolo-neuro {
+        font-size: 80px;
+        color: #4a90e2;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        margin-bottom: -15px;
+      }
+
+      .logo-app {
+        font-size: clamp(40px, 8vw, 64px);
+        font-weight: bold;
+        color: #2c5282;
+        letter-spacing: -2px;
+      }
+
+      .subtitulo-app {
+        color: #718096;
+        font-size: 18px;
+        margin-top: 5px;
+        font-weight: bold;
+      }
+
+      #tela-perfis {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+        background: radial-gradient(circle at top, #ffffff 0%, #f4f8fc 78%);
+      }
+
+      h1 {
+        color: #2d3748;
+        font-size: 32px;
+        margin-bottom: 36px;
+      }
+
+      .perfis-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 24px;
+        width: min(960px, 90vw);
+        padding: 20px;
+      }
+
+      .perfil-card {
+        width: 140px;
+        height: 168px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        border-radius: 28px;
+        position: relative;
+      }
+
+      .perfil-card:active {
+        transform: scale(0.95);
+      }
+
+      .avatar {
+        width: 96px;
+        height: 96px;
+        border-radius: 24px;
+        background: white;
+        border: 4px solid #e0e0e0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 52px;
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06), 0 0 0 12px rgba(74, 144, 226, var(--heat-opacity));
+        transition: all 0.25s ease;
+        margin-bottom: 15px;
+      }
+
+      .nome {
+        color: #4a5568;
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      .perfil-card:hover .avatar {
+        transform: translateY(-3px);
+      }
+
+      .convidado .avatar {
+        border-color: #a8d1e1;
+        background: #e6f2ff;
+      }
+
+      .add-perfil .avatar {
+        border-color: #d6dce3;
+        background: #f3f6f8;
+        color: #7c8a97;
+        font-size: 42px;
+      }
+
+      #cadeado {
+        position: fixed;
+        top: 18px;
+        right: 24px;
+        background-color: rgba(0, 0, 0, 0.06);
+        color: #5b6470;
+        padding: 12px 20px;
+        border-radius: 22px;
+        font-size: 15px;
+        font-weight: bold;
+        opacity: 0.9;
+        cursor: pointer;
+        z-index: 100;
+      }
+
+      #modal-admin {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(14, 28, 43, 0.42);
+        z-index: 9999;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .admin-content {
+        background: white;
+        padding: 28px;
+        border-radius: 24px;
+        width: min(820px, 92vw);
+        text-align: left;
+        max-height: 88vh;
+        overflow-y: auto;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
+      }
+
+      .admin-content h2,
+      .admin-content h3 {
+        color: #2d3748;
+        margin-top: 0;
+      }
+
+      .admin-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 22px;
+      }
+
+      .admin-block {
+        background: #f7fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 18px;
+        padding: 18px;
+      }
+
+      .admin-content input,
+      .admin-content select {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 12px;
+        border-radius: 10px;
+        border: 1px solid #cbd5e0;
+        box-sizing: border-box;
+        font-size: 16px;
+        font-family: inherit;
+      }
+
+      .lista-gerenciar {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .item-perfil {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 12px;
+        border-radius: 12px;
+        background: #fff;
+        border: 1px solid #e2e8f0;
+      }
+
+      .item-perfil span {
+        font-size: 17px;
+      }
+
+      .heatmap-panel {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .heatmap-row {
+        display: grid;
+        grid-template-columns: minmax(120px, 1fr) auto;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .heatmap-label,
+      .heatmap-value {
+        font-size: 14px;
+        color: #4a5568;
+      }
+
+      .heatmap-bar {
+        grid-column: 1 / -1;
+        width: 100%;
+        height: 10px;
+        background: #e6edf5;
+        border-radius: 999px;
+        overflow: hidden;
+      }
+
+      .heatmap-fill {
+        height: 100%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #a8d1e1, #4a90e2);
+      }
+
+      .heatmap-empty {
+        margin: 0;
+        color: #718096;
+      }
+
+      .admin-actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 20px;
+      }
+
+      .btn-salvar,
+      .btn-cancelar,
+      .btn-excluir {
+        border: none;
+        border-radius: 12px;
+        font-weight: bold;
+        cursor: pointer;
+        font-family: inherit;
+      }
+
+      .btn-salvar,
+      .btn-cancelar {
+        padding: 13px 16px;
+      }
+
+      .btn-salvar {
+        background: #005a9c;
+        color: white;
+      }
+
+      .btn-cancelar {
+        background: #e2e8f0;
+        color: #2d3748;
+      }
+
+      .btn-excluir {
+        background: #ff6b6b;
+        color: white;
+        padding: 8px 12px;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="cadeado" onclick="abrirAdmin()">Área do Mediador</div>
+
+    <div id="splash-screen">
+      <div class="logo-container">
+        <div class="simbolo-neuro">∞</div>
+        <div class="logo-app">RegulaMente</div>
+        <div class="subtitulo-app">Meu Guia de Emoções</div>
+      </div>
+    </div>
+
+    <div id="tela-perfis">
+      <h1>Quem vai usar o app hoje?</h1>
+      <div class="perfis-container" id="lista-perfis">
+        <div class="perfil-card convidado" data-heat-key="Convidado" onclick="entrarComo('Convidado')">
+          <div class="avatar">👽</div>
+          <div class="nome">Convidado</div>
+        </div>
+        <div class="perfil-card add-perfil" onclick="abrirAdmin()">
+          <div class="avatar">＋</div>
+          <div class="nome">Novo Perfil</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modal-admin" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+      <div class="admin-content">
+        <h2 id="modal-title">Painel do Mediador</h2>
+        <div class="admin-grid">
+          
+          <div class="admin-block">
+            <h3>Novo Perfil</h3>
+            <input type="text" id="input-nome" placeholder="Nome do aluno" />
+            <select id="select-avatar">
+              <option value="🐶">Cachorrinho</option>
+              <option value="🐱">Gatinho</option>
+              <option value="🦁">Leão</option>
+              <option value="🐸">Sapo</option>
+              <option value="🚀">Foguete</option>
+            </select>
+            <button class="btn-salvar" onclick="salvarPerfil()">Criar Perfil</button>
+          </div>
+
+          <div class="admin-block">
+            <h3>Mudar PIN</h3>
+            <input type="password" id="input-pin" placeholder="Novo PIN numérico" maxlength="4" />
+            <button class="btn-salvar" onclick="mudarPin()">Salvar PIN</button>
+          </div>
+
+          <div class="admin-block">
+            <h3>Gerenciar Perfis</h3>
+            <div class="lista-gerenciar" id="gerenciar-perfis"></div>
+          </div>
+
+          <div class="admin-block">
+            <div class="heatmap-panel" id="heatmap-perfis"></div>
+            <div class="heatmap-panel" id="heatmap-zonas"></div>
+          </div>
+        </div>
+
+        <div class="admin-actions">
+          <button class="btn-salvar" onclick="resetarHeatmap()">Limpar Heatmap</button>
+          <button class="btn-cancelar" onclick="fecharAdmin()">Fechar</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+      let perfis = JSON.parse(localStorage.getItem("app_perfis")) || [];
+
+      window.addEventListener("load", () => {
+        renderizarPerfis();
+
+        setTimeout(() => {
+          const splash = document.getElementById("splash-screen");
+          splash.style.opacity = "0";
+          
+          setTimeout(() => {
+            splash.style.visibility = "hidden";
+            document.getElementById("tela-perfis").style.opacity = "1";
+          }, 800);
+        }, 2200);
+      });
+
+      function criarCardPerfil(perfil) {
+        const card = document.createElement("div");
+        card.className = "perfil-card perfil-dinamico";
+        card.dataset.heatKey = perfil.nome;
+        card.onclick = () => entrarComo(perfil.nome);
+
+        const avatar = document.createElement("div");
+        avatar.className = "avatar";
+        avatar.style.borderColor = "#a8d1a8";
+        avatar.textContent = perfil.avatar;
+
+        const nome = document.createElement("div");
+        nome.className = "nome";
+        nome.textContent = perfil.nome;
+
+        card.appendChild(avatar);
+        card.appendChild(nome);
+        return card;
+      }
+
+      function criarItemGerenciar(perfil, index) {
+        const item = document.createElement("div");
+        item.className = "item-perfil";
+
+        const titulo = document.createElement("span");
+        titulo.textContent = `${perfil.avatar} ${perfil.nome}`;
+
+        const botao = document.createElement("button");
+        botao.className = "btn-excluir";
+        botao.type = "button";
+        botao.textContent = "Excluir";
+        botao.onclick = () => excluirPerfil(index);
+
+        item.appendChild(titulo);
+        item.appendChild(botao);
+        return item;
+      }
+
+      function renderizarPerfis() {
+        const container = document.getElementById("lista-perfis");
+        const listaGerenciar = document.getElementById("gerenciar-perfis");
+        const ancoraNovoPerfil = container.lastElementChild;
+
+        document.querySelectorAll(".perfil-dinamico").forEach(el => el.remove());
+        listaGerenciar.replaceChildren();
+
+        perfis.forEach((perfil, index) => {
+          container.insertBefore(criarCardPerfil(perfil), ancoraNovoPerfil);
+          listaGerenciar.appendChild(criarItemGerenciar(perfil, index));
+        });
+
+        if (perfis.length === 0) {
+          const vazio = document.createElement("p");
+          vazio.className = "heatmap-empty";
+          vazio.textContent = "Nenhum perfil salvo ainda.";
+          listaGerenciar.appendChild(vazio);
+        }
+
+        renderizarHeatmap();
+        
+        if (typeof RegulaMenteApp !== 'undefined') {
+          RegulaMenteApp.applyUsageHeat(container, "perfis", (el) => el.dataset.heatKey);
+        }
+      }
+
+      function renderizarHeatmap() {
+        if (typeof RegulaMenteApp === 'undefined') return;
+
+        const heatmapPerfis = RegulaMenteApp.getHeatmapEntries("perfis");
+        const heatmapZonas = RegulaMenteApp.getHeatmapEntries("zonas");
+
+        RegulaMenteApp.renderHeatmapList(
+          document.getElementById("heatmap-perfis"),
+          heatmapPerfis,
+          { title: "Uso de Perfis", emptyText: "Os perfis aparecem aqui depois do uso." }
+        );
+
+        RegulaMenteApp.renderHeatmapList(
+          document.getElementById("heatmap-zonas"),
+          heatmapZonas,
+          { title: "Zonas de Interação", emptyText: "As áreas mais tocadas aparecerão aqui." }
+        );
+      }
+
+      function entrarComo(nome) {
+        localStorage.setItem("usuarioAtual", nome);
+        if (typeof RegulaMenteApp !== 'undefined') {
+          RegulaMenteApp.trackHeatmap("perfis", nome, { label: nome, page: "index" });
+        }
+        window.location.href = "principal.html";
+      }
+
+      function abrirAdmin() {
+        if (typeof RegulaMenteApp !== 'undefined' && RegulaMenteApp.promptForMediatorPin()) {
+          const modal = document.getElementById("modal-admin");
+          modal.style.display = "flex";
+          modal.setAttribute("aria-hidden", "false");
+          renderizarHeatmap();
+        } else if (typeof RegulaMenteApp === 'undefined') {
+            // Fallback caso o app.js não carregue na hora
+            const modal = document.getElementById("modal-admin");
+            modal.style.display = "flex";
+            modal.setAttribute("aria-hidden", "false");
+        } else {
+          alert("PIN incorreto. Tente novamente.");
+        }
+      }
+
+      function fecharAdmin() {
+        const modal = document.getElementById("modal-admin");
+        modal.style.display = "none";
+        modal.setAttribute("aria-hidden", "true");
+      }
+
+      function salvarPerfil() {
+        const nome = document.getElementById("input-nome").value.trim();
+        const avatar = document.getElementById("select-avatar").value;
+
+        if (!nome) {
+          alert("Por favor, digite um nome para o perfil.");
+          return;
+        }
+
+        if (nome.length > 20) {
+          alert("O nome ficou muito longo! O máximo é de 20 caracteres.");
+          return;
+        }
+
+        const nomeExiste = perfis.some(p => p.nome.toLowerCase() === nome.toLowerCase());
+        if (nomeExiste) {
+          alert("Esse nome já está sendo usado por outro aluno.");
+          return;
+        }
+
+        perfis.push({ nome, avatar });
+        localStorage.setItem("app_perfis", JSON.stringify(perfis));
+        
+        document.getElementById("input-nome").value = "";
+        renderizarPerfis();
+      }
+
+      function mudarPin() {
+        const novoPin = document.getElementById("input-pin").value.trim();
+
+        if (!/^\d{4}$/.test(novoPin)) {
+          alert("Atenção: o PIN precisa ter exatamente 4 números.");
+          return;
+        }
+
+        if (typeof RegulaMenteApp !== 'undefined') {
+          RegulaMenteApp.setAppPin(novoPin);
+          document.getElementById("input-pin").value = "";
+          alert("PIN atualizado com sucesso!");
+        }
+      }
+
+      function excluirPerfil(index) {
+        const perfil = perfis[index];
+        if (!perfil) return;
+
+        if (confirm(`Tem certeza que deseja apagar o perfil de ${perfil.nome}?`)) {
+          perfis.splice(index, 1);
+          localStorage.setItem("app_perfis", JSON.stringify(perfis));
+          renderizarPerfis();
+        }
+      }
+
+      function resetarHeatmap() {
+        if (confirm("Isso vai limpar todos os dados de uso. Deseja continuar?")) {
+          if (typeof RegulaMenteApp !== 'undefined') {
+            RegulaMenteApp.clearHeatmap();
+            renderizarPerfis();
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
