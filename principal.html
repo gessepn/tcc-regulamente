@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>Cores do Sentir - Principal</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        overscroll-behavior: none;
+        touch-action: none;
+        -webkit-touch-callout: none;
+        user-select: none;
+      }
+
+      body {
+        font-family: "Varela Round", sans-serif;
+        text-align: center;
+        background: radial-gradient(circle at top, #ffffff 0%, #eef5fb 70%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #btn-sair {
+        position: fixed;
+        top: 18px;
+        left: 24px;
+        background-color: rgba(0, 0, 0, 0.05);
+        color: #555;
+        padding: 10px 16px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      #tela-intro {
+        position: fixed;
+        inset: 0;
+        background-color: #fefeff;
+        z-index: 10000;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: opacity 1s ease-in-out;
+      }
+
+      #texto-intro {
+        color: #555;
+        font-size: 32px;
+        margin-bottom: 40px;
+        font-weight: bold;
+        transition: opacity 0.5s ease;
+      }
+
+      .circulos-intro {
+        display: flex;
+        gap: 20px;
+      }
+
+      .circulo {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        animation: respiracao 3s ease-in-out infinite;
+      }
+
+      .circulo.azul {
+        background-color: #a8d1e1;
+        animation-delay: 0s;
+      }
+
+      .circulo.verde {
+        background-color: #a8d1a8;
+        animation-delay: 0.2s;
+      }
+
+      .circulo.amarela {
+        background-color: #fdfd96;
+        animation-delay: 0.4s;
+      }
+
+      .circulo.vermelha {
+        background-color: #ff9696;
+        animation-delay: 0.6s;
+      }
+
+      @keyframes respiracao {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.5;
+        }
+        50% {
+          transform: scale(1.8);
+          opacity: 1;
+        }
+      }
+
+      #btn-pular {
+        position: absolute;
+        bottom: 30px;
+        padding: 10px 25px;
+        border-radius: 20px;
+        background-color: #f0f0f0;
+        color: #888;
+        border: none;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        font-family: "Varela Round", sans-serif;
+      }
+
+      #conteudo-app {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+      }
+
+      h1 {
+        color: #333;
+        margin-bottom: 20px;
+        font-size: 28px;
+        z-index: 1;
+        transition: opacity 0.5s ease;
+      }
+
+      .app-container {
+        background-color: rgba(255, 255, 255, 0.78);
+        backdrop-filter: blur(5px);
+        padding: 20px 20px 0 20px;
+        border-radius: 24px;
+        box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
+        width: min(980px, 92vw);
+        margin: auto;
+        z-index: 1;
+        box-sizing: border-box;
+      }
+
+      .pizza-container {
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      .pizza-container svg {
+        width: 100%;
+        height: auto;
+        display: block;
+        overflow: visible;
+      }
+
+      .fatia {
+        cursor: pointer;
+        transform-origin: 500px 500px;
+        transition:
+          transform 0.3s ease,
+          filter 0.3s ease,
+          opacity 0.3s ease;
+      }
+
+      .fatia text {
+        pointer-events: none;
+        font-family: "Varela Round", sans-serif;
+      }
+
+      .fatia:hover {
+        transform: scale(1.02);
+      }
+
+      .fatia.apagada {
+        opacity: 0.1;
+        transform: scale(0.9);
+        pointer-events: none;
+      }
+
+      .fatia.destacada {
+        transform: scale(1.15);
+        z-index: 10;
+      }
+
+      .titulo-apagado {
+        opacity: 0;
+      }
+
+      .infantile-details {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        opacity: 0.12;
+      }
+
+      .detail-1 {
+        position: absolute;
+        top: 10%;
+        left: 5%;
+        width: 100px;
+        height: 100px;
+        background-color: #a9d1e1;
+        border-radius: 50%;
+      }
+
+      .detail-2 {
+        position: absolute;
+        bottom: 15%;
+        right: 10%;
+        width: 150px;
+        height: 150px;
+        background-color: #a8d1a8;
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      }
+    </style>
+  </head>
+  <body oncontextmenu="return false;">
+    <div id="btn-sair" onclick="sairPerfil()">
+      <span id="nome-usuario-ativo">👤 Aluno</span>
+      <span style="font-size: 12px; color: #888; margin-left: 5px">(Trocar)</span>
+    </div>
+
+    <div id="tela-intro">
+      <h1 id="texto-intro">Respire fundo...</h1>
+      <div class="circulos-intro">
+        <div class="circulo azul"></div>
+        <div class="circulo verde"></div>
+        <div class="circulo amarela"></div>
+        <div class="circulo vermelha"></div>
+      </div>
+      <button id="btn-pular" onclick="finalizarIntro()">Pular</button>
+    </div>
+
+    <div id="conteudo-app">
+      <div class="infantile-details">
+        <div class="detail-1"></div>
+        <div class="detail-2"></div>
+      </div>
+
+      <div class="app-container">
+        <h1 id="titulo-principal">Como você está se sentindo hoje?</h1>
+
+        <div class="pizza-container">
+          <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
+            <g class="fatia azul" data-zona="azul">
+              <path
+                d="M 500 500 L 0 500 A 500 500 0 0 1 146.45 146.45 Z"
+                fill="#a8d1e1"
+                stroke="#fefeff"
+                stroke-width="12"
+              />
+              <text x="180" y="310" text-anchor="middle" font-size="70">😥</text>
+              <text x="180" y="370" text-anchor="middle" font-size="32" font-weight="bold" fill="#333">ZONA AZUL</text>
+              <text x="180" y="410" text-anchor="middle" font-size="22" fill="#555">Triste /</text>
+              <text x="180" y="440" text-anchor="middle" font-size="22" fill="#555">Cansada</text>
+            </g>
+
+            <g class="fatia verde" data-zona="verde">
+              <path
+                d="M 500 500 L 146.45 146.45 A 500 500 0 0 1 500 0 Z"
+                fill="#a8d1a8"
+                stroke="#fefeff"
+                stroke-width="12"
+              />
+              <text x="360" y="140" text-anchor="middle" font-size="70">😊</text>
+              <text x="360" y="200" text-anchor="middle" font-size="32" font-weight="bold" fill="#333">ZONA VERDE</text>
+              <text x="360" y="240" text-anchor="middle" font-size="22" fill="#555">Feliz /</text>
+              <text x="360" y="270" text-anchor="middle" font-size="22" fill="#555">Calma</text>
+            </g>
+
+            <g class="fatia amarela" data-zona="amarela">
+              <path
+                d="M 500 500 L 500 0 A 500 500 0 0 1 853.55 146.45 Z"
+                fill="#fdfd96"
+                stroke="#fefeff"
+                stroke-width="12"
+              />
+              <text x="640" y="140" text-anchor="middle" font-size="70">😟</text>
+              <text x="640" y="200" text-anchor="middle" font-size="32" font-weight="bold" fill="#333">ZONA AMARELA</text>
+              <text x="640" y="240" text-anchor="middle" font-size="22" fill="#555">Agitada /</text>
+              <text x="640" y="270" text-anchor="middle" font-size="22" fill="#555">Preocupada</text>
+            </g>
+
+            <g class="fatia vermelha" data-zona="vermelha">
+              <path
+                d="M 500 500 L 853.55 146.45 A 500 500 0 0 1 1000 500 Z"
+                fill="#ff9696"
+                stroke="#fefeff"
+                stroke-width="12"
+              />
+              <text x="820" y="310" text-anchor="middle" font-size="70">😡</text>
+              <text x="820" y="370" text-anchor="middle" font-size="32" font-weight="bold" fill="#333">ZONA VERMELHA</text>
+              <text x="820" y="410" text-anchor="middle" font-size="22" fill="#555">Brava /</text>
+              <text x="820" y="440" text-anchor="middle" font-size="22" fill="#555">Assustada</text>
+            </g>
+
+            <path d="M 380 500 A 120 120 0 0 1 620 500 Z" fill="#fefeff" />
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+      let introTimer1, introTimer2;
+
+      const usuarioAtivo = localStorage.getItem("usuarioAtual") || "Convidado";
+      document.getElementById("nome-usuario-ativo").innerText = `👤 ${usuarioAtivo}`;
+
+      function sairPerfil() {
+        sessionStorage.removeItem("introVisto");
+        window.location.href = "index.html";
+      }
+
+      function iniciarIntro() {
+        aplicarHeatmapNasZonas();
+
+        if (sessionStorage.getItem("introVisto") === "sim") {
+          finalizarIntro(true);
+          return;
+        }
+
+        const texto = document.getElementById("texto-intro");
+
+        introTimer1 = setTimeout(() => {
+          texto.style.opacity = 0;
+          setTimeout(() => {
+            texto.innerText = "Vamos ver como você está se sentindo?";
+            texto.style.opacity = 1;
+          }, 500);
+        }, 3000);
+
+        introTimer2 = setTimeout(() => {
+          finalizarIntro();
+        }, 6000);
+      }
+
+      function finalizarIntro(imediato = false) {
+        clearTimeout(introTimer1);
+        clearTimeout(introTimer2);
+
+        sessionStorage.setItem("introVisto", "sim");
+
+        const telaIntro = document.getElementById("tela-intro");
+        const app = document.getElementById("conteudo-app");
+
+        if (imediato) {
+          telaIntro.style.display = "none";
+          app.style.opacity = 1;
+        } else {
+          telaIntro.style.opacity = 0;
+          setTimeout(() => {
+            telaIntro.style.display = "none";
+            app.style.opacity = 1;
+          }, 1000);
+        }
+      }
+
+      function aplicarHeatmapNasZonas() {
+        if (typeof RegulaMenteApp === 'undefined') return;
+        
+        const entradas = RegulaMenteApp.getHeatmapEntries("zonas");
+        const maximo = entradas.length ? entradas[0].count : 0;
+
+        document.querySelectorAll(".fatia").forEach((fatia) => {
+          const zona = fatia.getAttribute("data-zona");
+          const entrada = entradas.find((item) => item.key === zona);
+          const intensidade = entrada && maximo ? calcularIntensidade(entrada.count, maximo) : 0;
+          
+          fatia.style.filter = intensidade
+            ? `drop-shadow(0px 0px ${18 + intensidade * 18}px rgba(0, 0, 0, ${0.18 + intensidade * 0.18}))`
+            : "none";
+          fatia.style.opacity = entrada ? String(0.82 + intensidade * 0.18) : "1";
+        });
+      }
+
+      function calcularIntensidade(count, maximo) {
+        return Math.max(0.18, Math.min(1, count / maximo));
+      }
+
+      window.addEventListener("load", iniciarIntro);
+
+      const fatias = document.querySelectorAll(".fatia");
+      let travado = false;
+
+      fatias.forEach((fatia) => {
+        const zona = fatia.getAttribute("data-zona");
+
+        fatia.addEventListener("click", () => {
+          if (travado) return;
+          travado = true;
+
+          if (typeof RegulaMenteApp !== 'undefined') {
+            RegulaMenteApp.trackHeatmap("zonas", zona, {
+              label: `Zona ${zona.charAt(0).toUpperCase()}${zona.slice(1)}`,
+              page: "principal",
+            });
+          }
+          
+          localStorage.setItem("zonaAtual", zona);
+
+          fatias.forEach((item) => {
+            if (item === fatia) {
+              item.classList.add("destacada");
+            } else {
+              item.classList.add("apagada");
+            }
+          });
+
+          document.getElementById("titulo-principal").classList.add("titulo-apagado");
+
+          setTimeout(() => {
+            window.location.href = `acoes_${zona}.html`;
+          }, 1500);
+        });
+      });
+    </script>
+  </body>
+</html>
