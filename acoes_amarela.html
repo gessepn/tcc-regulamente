@@ -86,12 +86,10 @@
             <div class="admin-grid">
                 <div class="admin-block">
                     <h2>Nova Ação (Crianças)</h2>
-                    <p>Adicione um botão. Os textos longos não aparecem mais para elas!</p>
-                    <input type="text" id="input-emoji" placeholder="Emoji (ex: 🧸)">
-                    <input type="text" id="input-nome" placeholder="Nome (ex: Abraçar urso)">
-                    <input type="text" id="input-fala" placeholder="O que o tablet deve falar? (ex: Vamos abraçar o ursinho!)">
-                    <textarea id="input-sig" placeholder="Significado (Para seu TCC)" style="display:none;"></textarea>
-                    <textarea id="input-texto" placeholder="Ação (Para seu TCC)" style="display:none;"></textarea>
+                    <p>Adicione um botão personalizado para a sua turma.</p>
+                    <input type="text" id="input-emoji" placeholder="Emoji (ex: 🧩)">
+                    <input type="text" id="input-nome" placeholder="Nome do botão (ex: Montar peças)">
+                    <input type="text" id="input-texto-visual" placeholder="Texto para a tela (ex: Vamos focar no brinquedo!)">
                     
                     <button class="btn-salvar" onclick="salvarAcaoPersonalizada()">Salvar Botão</button>
                     <button class="btn-apagar" id="btn-remover-custom" style="display: none;" onclick="apagarAcaoPersonalizada()">Remover Botão</button>
@@ -115,7 +113,7 @@
                 <button class="acao" data-heat-key="amarela:pausa" onclick="selecionarAcao('pausa', this)"><span>⏸️</span>Pausa rápida</button>
                 <button class="acao" data-heat-key="amarela:agua" onclick="selecionarAcao('agua', this)"><span>💧</span>Beber água</button>
                 <button class="acao" data-heat-key="amarela:caminhar" onclick="selecionarAcao('caminhar', this)"><span>🚶</span>Caminhar</button>
-                <button class="acao" data-heat-key="amarela:contar" onclick="selecionarAcao('contar', this)"><span>🔢</span>Contar até 10</button>
+                <button class="acao" data-heat-key="amarela:contar" onclick="selecionarAcao('contar', this)"><span>🔢</span>Contar até 3</button>
             </div>
             
             <div class="painel-feedback" id="painel-mediador">
@@ -137,38 +135,44 @@
         const ZONA = 'amarela';
         const STORAGE_KEY = 'custom_amarela';
         let timerReset;
+        let audioAtual = null;
         
-        // Falas e GIFs focados na Zona Amarela (Agitação e Ansiedade)
         const orientacoes = {
             "apertar": {
                 "label": "Apertar algo",
-                "fala": "Aperte bem forte! Isso ajuda a relaxar o corpo.",
-                "gif": "https://media.giphy.com/media/26AHONQ79FdWZhAI0/giphy.gif" // Relaxamento
+                "textoVisual": "Pode apertar a massinha bem forte.",
+                "audio": "/audios/zona_amarela/Apertar.m4a",
+                "gif": "https://media.giphy.com/media/3o7WTF9ZcEAqR3yK7m/giphy.gif"
             },
             "brinquedo": {
                 "label": "Brinquedo",
-                "fala": "Pode brincar um pouco. Foque apenas no seu brinquedo.",
-                "gif": "https://media.giphy.com/media/l46CBEVQjSJG6mCnC/giphy.gif" // Personagem brincando
-            },
-            "pausa": {
-                "label": "Pausa rápida",
-                "fala": "Tudo bem, faça uma pausa. Respire devagar.",
-                "gif": "https://media.giphy.com/media/xT0xex57qDRZnZX9yU/giphy.gif" // Personagem pausando
-            },
-            "agua": {
-                "label": "Beber água",
-                "fala": "Beba uma água fresca. Vai fazer você se sentir melhor.",
-                "gif": "https://media.giphy.com/media/3o7TKrEzvLbgzGmidO/giphy.gif" // Bebendo água
+                "textoVisual": "Pode pegar o seu brinquedo.",
+                "audio": "/audios/zona_amarela/Brinquedo.m4a",
+                "gif": "https://media.giphy.com/media/26AHONQ79FdWZhAI0/giphy.gif" 
             },
             "caminhar": {
                 "label": "Caminhar",
-                "fala": "Dar uma voltinha ajuda a gastar essa energia.",
-                "gif": "https://media.giphy.com/media/21GCae4djDWtP5soiY/giphy.gif" // Pusheen andando
+                "textoVisual": "Vamos caminhar um pouco.",
+                "audio": "/audios/zona_amarela/Caminhar.m4a",
+                "gif": "https://media.giphy.com/media/21GCae4djDWtP5soiY/giphy.gif" 
+            },
+            "pausa": {
+                "label": "Pausa rápida",
+                "textoVisual": "Pausa rápida. Pode sentar e respirar.",
+                "audio": "/audios/zona_amarela/Pausa.m4a",
+                "gif": "https://media.giphy.com/media/11ISwbgCxEzMyY/giphy.gif" 
+            },
+            "agua": {
+                "label": "Beber água",
+                "textoVisual": "Vamos beber água.",
+                "audio": "/audios/zona_amarela/Agua.m4a",
+                "gif": "https://media.giphy.com/media/3o7TKrEzvLbgzGmidO/giphy.gif" 
             },
             "contar": {
-                "label": "Contar até 10",
-                "fala": "Conte devagarinho... Um, Dois, Três... Isso acalma a mente.",
-                "gif": "https://media.giphy.com/media/l1J9urAfGd3grKV6E/giphy.gif" // Personagem calmo
+                "label": "Contar até 3",
+                "textoVisual": "Conte devagarinho... Um, Dois, Três... Isso acalma a mente.",
+                "audio": "/audios/zona_amarela/Contar.m4a",
+                "gif": "https://media.giphy.com/media/l1J9urAfGd3grKV6E/giphy.gif"
             }
         };
         
@@ -188,32 +192,13 @@
             return btn;
         }
 
-        if ('speechSynthesis' in window) {
-            window.speechSynthesis.onvoiceschanged = function() {
-                window.speechSynthesis.getVoices();
-            };
-        }
-
-        // FUNÇÃO DE VOZ (Feminina e Acolhedora)
-        function falarTexto(texto) {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel(); 
-                const voz = new SpeechSynthesisUtterance(texto);
-                voz.lang = 'pt-BR';
-                
-                const vozes = window.speechSynthesis.getVoices();
-                const vozFeminina = vozes.find(v => v.lang === 'pt-BR' && 
-                    (v.name.includes('Luciana') || v.name.includes('Maria') || v.name.includes('Google português do Brasil') || v.name.toLowerCase().includes('female'))
-                );
-                
-                if (vozFeminina) {
-                    voz.voice = vozFeminina;
-                }
-
-                voz.rate = 0.95; 
-                voz.pitch = 1.2; 
-                window.speechSynthesis.speak(voz);
+        function tocarAudio(caminhoArquivo) {
+            if (audioAtual) {
+                audioAtual.pause();
+                audioAtual.currentTime = 0;
             }
+            audioAtual = new Audio(caminhoArquivo);
+            audioAtual.play().catch(erro => console.error("Erro ao reproduzir o áudio:", erro));
         }
 
         function renderizarHeatmapZona() {
@@ -244,8 +229,9 @@
                 const dados = JSON.parse(salvo);
                 orientacoes.custom = {
                     label: dados.nome,
-                    fala: dados.fala || "Isso vai ajudar você a se acalmar.",
-                    gif: "https://media.giphy.com/media/L0z2XEn1zI8Tq4D2x6/giphy.gif" // GIF Joinha
+                    textoVisual: dados.textoVisual || "Isso vai ajudar você a se acalmar.",
+                    audio: "/audios/zona_amarela/Customizado.m4a", 
+                    gif: "https://media.giphy.com/media/L0z2XEn1zI8Tq4D2x6/giphy.gif"
                 };
                 
                 const btn = criarBotaoAcao('custom', dados.emoji, dados.nome);
@@ -278,7 +264,7 @@
                 const dados = JSON.parse(salvo);
                 document.getElementById('input-emoji').value = dados.emoji;
                 document.getElementById('input-nome').value = dados.nome;
-                document.getElementById('input-fala').value = dados.fala || "";
+                document.getElementById('input-texto-visual').value = dados.textoVisual || "";
             }
             renderizarHeatmapZona();
         }
@@ -290,14 +276,14 @@
         function salvarAcaoPersonalizada() {
             const emoji = document.getElementById('input-emoji').value.trim();
             const nome = document.getElementById('input-nome').value.trim();
-            const fala = document.getElementById('input-fala').value.trim();
+            const textoVisual = document.getElementById('input-texto-visual').value.trim();
             
             if (!nome || !emoji) {
                 alert('Preencha pelo menos o Emoji e o Nome!');
                 return;
             }
             
-            localStorage.setItem(STORAGE_KEY, JSON.stringify({ emoji, nome, fala, significado: "", texto: "" }));
+            localStorage.setItem(STORAGE_KEY, JSON.stringify({ emoji, nome, textoVisual }));
             fecharAdmin();
             carregarPersonalizado();
         }
@@ -338,9 +324,9 @@
                 }
             });
             
-            document.getElementById('texto-feedback').textContent = orientacao.fala;
+            document.getElementById('texto-feedback').textContent = orientacao.textoVisual;
             document.getElementById('gif-recompensa').src = orientacao.gif;
-            falarTexto(orientacao.fala);
+            tocarAudio(orientacao.audio);
             
             const barra = document.getElementById('timer-barra');
             barra.style.transition = 'none';
@@ -358,7 +344,7 @@
 
         function acaoVoltar() {
             clearTimeout(timerReset); 
-            if ('speechSynthesis' in window) window.speechSynthesis.cancel(); 
+            if (audioAtual) audioAtual.pause(); 
 
             if (modoFocoAtivo) {
                 modoFocoAtivo = false;

@@ -24,12 +24,10 @@
         .acao.selecionado { flex: 1 1 100%; max-width: 100%; height: 350px; transform: scale(1.02); pointer-events: none; box-shadow: 0 12px 26px rgba(0,0,0,0.16); font-size: 26px; }
         .acao.selecionado span { font-size: 85px; margin-bottom: 20px; }
         
-        /* NOVO PAINEL DE FEEDBACK LÚDICO */
         .painel-feedback { width: 0; opacity: 0; padding: 0; margin-left: 0; overflow: hidden; background: white; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; border-left: 0 solid #e6f2ff; transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
         .gif-recompensa { width: 200px; height: 200px; object-fit: cover; border-radius: 20px; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .texto-feedback { color: #005A9C; font-size: 22px; font-weight: bold; margin: 0 10px 15px 10px; }
         
-        /* BARRA DE PROGRESSO DO TEMPO */
         .timer-container { width: 80%; height: 12px; background-color: #e0e0e0; border-radius: 10px; overflow: hidden; margin-top: 10px; }
         .timer-barra { width: 100%; height: 100%; background-color: #005A9C; transition: width 8s linear; }
 
@@ -41,7 +39,6 @@
         .btn-controle:active { transform: scale(0.95); }
         .titulo-oculto { opacity: 0; height: 0; margin: 0; overflow: hidden; }
 
-        /* MANTIDO O CADEADO PARA VOCÊ TER ACESSO AOS DADOS DO TCC */
         #cadeado { position: fixed; top: 18px; right: 24px; background-color: rgba(0, 0, 0, 0.05); color: #666; padding: 12px 20px; border-radius: 20px; font-size: 15px; font-weight: bold; cursor: pointer; z-index: 100; }
         #modal-admin { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.72); z-index: 9999; justify-content: center; align-items: center; }
         .admin-content { background: white; padding: 25px; border-radius: 20px; width: min(760px, 92vw); text-align: left; max-height: 88vh; overflow-y: auto; box-sizing: border-box; }
@@ -61,7 +58,6 @@
         .btn-apagar { background: #d32f2f; color: white; }
         .btn-cancelar { background: #e0e0e0; color: #333; }
 
-        /* RESPONSIVIDADE (CELULAR DEITADO E EM PÉ) */
         @media (max-width: 768px) {
             h1 { font-size: 22px; margin-bottom: 20px; margin-top: 40px; }
             .container-botoes { gap: 10px; }
@@ -87,12 +83,10 @@
             <div class="admin-grid">
                 <div class="admin-block">
                     <h2>Nova Ação (Crianças)</h2>
-                    <p>Adicione um botão. Os textos longos não aparecem mais para elas!</p>
+                    <p>Adicione um botão personalizado para a sua turma.</p>
                     <input type="text" id="input-emoji" placeholder="Emoji (ex: 🧸)">
                     <input type="text" id="input-nome" placeholder="Nome (ex: Abraçar urso)">
-                    <input type="text" id="input-fala" placeholder="O que o tablet deve falar? (ex: Vamos abraçar o ursinho!)">
-                    <textarea id="input-sig" placeholder="Significado (Para seu TCC)" style="display:none;"></textarea>
-                    <textarea id="input-texto" placeholder="Ação (Para seu TCC)" style="display:none;"></textarea>
+                    <input type="text" id="input-texto-visual" placeholder="Texto para a tela (ex: Vamos abraçar o ursinho!)">
                     
                     <button class="btn-salvar" onclick="salvarAcaoPersonalizada()">Salvar Botão</button>
                     <button class="btn-apagar" id="btn-remover-custom" style="display: none;" onclick="apagarAcaoPersonalizada()">Remover Botão</button>
@@ -138,38 +132,44 @@
         const ZONA = 'azul';
         const STORAGE_KEY = 'custom_azul';
         let timerReset;
+        let audioAtual = null;
         
-        // Dicionário com Falas Acolhedoras e seus respectivos GIFs dinâmicos
         const orientacoes = {
             "descansar": {
                 "label": "Descansar",
-                "fala": "Você pode descansar um pouquinho. Feche os olhos e relaxe.",
-                "gif": "https://media.giphy.com/media/xT0xeJpnrWC4XWblWQ/giphy.gif" // Snoopy dormindo
+                "textoVisual": "Você pode descansar um pouquinho. Feche os olhos e relaxe.",
+                "audio": "/audios/zona_azul/Descansar.m4a",
+                "gif": "https://media.giphy.com/media/xT0xeJpnrWC4XWblWQ/giphy.gif"
             },
             "musica": {
                 "label": "Ouvir música",
-                "fala": "Coloque o fone e ouça uma música bem calma.",
-                "gif": "https://media.giphy.com/media/10VjiVoa9rWC4M/giphy.gif" // Gato ouvindo música
+                "textoVisual": "Coloque o fone e ouça uma música bem calma.",
+                "audio": "/audios/zona_azul/Musica.m4a",
+                "gif": "https://media.giphy.com/media/10VjiVoa9rWC4M/giphy.gif" 
             },
             "caminhar": {
                 "label": "Caminhar",
-                "fala": "Vamos dar uma volta? Caminhar ajuda a organizar o corpo.",
-                "gif": "https://media.giphy.com/media/21GCae4djDWtP5soiY/giphy.gif" // Pusheen andando
+                "textoVisual": "Vamos dar uma volta? Caminhar ajuda a organizar o corpo.",
+                "audio": "/audios/zona_azul/Caminhar.m4a",
+                "gif": "https://media.giphy.com/media/21GCae4djDWtP5soiY/giphy.gif" 
             },
             "desenhar": {
                 "label": "Desenhar",
-                "fala": "Aqui estão os lápis. Desenhe o que você está sentindo.",
-                "gif": "https://media.giphy.com/media/l41JRsA2iT7uofKqA/giphy.gif" // Personagem desenhando
+                "textoVisual": "Aqui estão os lápis. Desenhe o que você está sentindo.",
+                "audio": "/audios/zona_azul/Desenhar.m4a",
+                "gif": "https://media.giphy.com/media/l41JRsA2iT7uofKqA/giphy.gif" 
             },
             "ajuda": {
                 "label": "Pedir ajuda",
-                "fala": "Tudo bem pedir ajuda. Um abraço pode fazer bem.",
-                "gif": "https://media.giphy.com/media/l8ooOxhcItowwLPuZn/giphy.gif" // Abraço afetuoso
+                "textoVisual": "Tudo bem pedir ajuda. Estou aqui com você.",
+                "audio": "/audios/zona_azul/Ajuda.m4a",
+                "gif": "https://media.giphy.com/media/l8ooOxhcItowwLPuZn/giphy.gif" 
             },
             "agua": {
                 "label": "Beber água",
-                "fala": "Beba um pouco de água devagar. Isso ajuda a acalmar.",
-                "gif": "https://media.giphy.com/media/3o7TKrEzvLbgzGmidO/giphy.gif" // Bebendo água relaxado
+                "textoVisual": "Beba um pouco de água devagar. Isso ajuda a acalmar.",
+                "audio": "/audios/zona_azul/Agua.m4a",
+                "gif": "https://media.giphy.com/media/3o7TKrEzvLbgzGmidO/giphy.gif" 
             }
         };
         
@@ -189,35 +189,13 @@
             return btn;
         }
 
-        // Garante que as vozes carreguem
-        if ('speechSynthesis' in window) {
-            window.speechSynthesis.onvoiceschanged = function() {
-                window.speechSynthesis.getVoices();
-            };
-        }
-
-        // FUNÇÃO DE VOZ (Texto para Áudio com Voz Feminina e Acolhedora)
-        function falarTexto(texto) {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel(); // Corta fala anterior se houver
-                const voz = new SpeechSynthesisUtterance(texto);
-                voz.lang = 'pt-BR';
-                
-                // Força a buscar uma voz feminina e em português
-                const vozes = window.speechSynthesis.getVoices();
-                const vozFeminina = vozes.find(v => v.lang === 'pt-BR' && 
-                    (v.name.includes('Luciana') || v.name.includes('Maria') || v.name.includes('Google português do Brasil') || v.name.toLowerCase().includes('female'))
-                );
-                
-                if (vozFeminina) {
-                    voz.voice = vozFeminina;
-                }
-
-                // Na zona azul, a voz é um pouco mais suave e devagar para acolher
-                voz.rate = 0.9; 
-                voz.pitch = 1.1; 
-                window.speechSynthesis.speak(voz);
+        function tocarAudio(caminhoArquivo) {
+            if (audioAtual) {
+                audioAtual.pause();
+                audioAtual.currentTime = 0;
             }
+            audioAtual = new Audio(caminhoArquivo);
+            audioAtual.play().catch(erro => console.error("Erro ao reproduzir o áudio:", erro));
         }
 
         function renderizarHeatmapZona() {
@@ -248,8 +226,9 @@
                 const dados = JSON.parse(salvo);
                 orientacoes.custom = {
                     label: dados.nome,
-                    fala: dados.fala || "Estou aqui com você. Vai ficar tudo bem.",
-                    gif: "https://media.giphy.com/media/Vz58J8shFW6BvqnYTm/giphy.gif" // GIF padrão de abraço
+                    textoVisual: dados.textoVisual || "Estou aqui com você. Vai ficar tudo bem.",
+                    audio: "/audios/zona_azul/Customizado.m4a", 
+                    gif: "https://media.giphy.com/media/Vz58J8shFW6BvqnYTm/giphy.gif"
                 };
                 
                 const btn = criarBotaoAcao('custom', dados.emoji, dados.nome);
@@ -282,7 +261,7 @@
                 const dados = JSON.parse(salvo);
                 document.getElementById('input-emoji').value = dados.emoji;
                 document.getElementById('input-nome').value = dados.nome;
-                document.getElementById('input-fala').value = dados.fala || "";
+                document.getElementById('input-texto-visual').value = dados.textoVisual || "";
             }
             renderizarHeatmapZona();
         }
@@ -294,14 +273,14 @@
         function salvarAcaoPersonalizada() {
             const emoji = document.getElementById('input-emoji').value.trim();
             const nome = document.getElementById('input-nome').value.trim();
-            const fala = document.getElementById('input-fala').value.trim();
+            const textoVisual = document.getElementById('input-texto-visual').value.trim();
             
             if (!nome || !emoji) {
                 alert('Preencha pelo menos o Emoji e o Nome!');
                 return;
             }
             
-            localStorage.setItem(STORAGE_KEY, JSON.stringify({ emoji, nome, fala, significado: "", texto: "" }));
+            localStorage.setItem(STORAGE_KEY, JSON.stringify({ emoji, nome, textoVisual }));
             fecharAdmin();
             carregarPersonalizado();
         }
@@ -319,9 +298,8 @@
             if (!orientacao) return;
             
             modoFocoAtivo = true;
-            clearTimeout(timerReset); // Limpa qualquer timer anterior
+            clearTimeout(timerReset); 
             
-            // SALVA OS DADOS PARA O SEU TCC INVISIVELMENTE
             if (typeof RegulaMenteApp !== 'undefined') {
                 RegulaMenteApp.trackHeatmap('acoes', ZONA + ':' + chave, {
                     label: orientacao.label,
@@ -343,30 +321,27 @@
                 }
             });
             
-            // ATIVA A VOZ, O TEXTO E O GIF ESPECÍFICO NA TELA
-            document.getElementById('texto-feedback').textContent = orientacao.fala;
+            document.getElementById('texto-feedback').textContent = orientacao.textoVisual;
             document.getElementById('gif-recompensa').src = orientacao.gif;
-            falarTexto(orientacao.fala);
+            tocarAudio(orientacao.audio);
             
-            // ANIMAÇÃO DA BARRA DE TEMPO (TIMER DE FILA)
             const barra = document.getElementById('timer-barra');
             barra.style.transition = 'none';
-            barra.style.width = '100%'; // Reseta pra 100% rápido
+            barra.style.width = '100%'; 
             
             setTimeout(() => {
                 barra.style.transition = 'width 8s linear';
-                barra.style.width = '0%'; // Vai esvaziando em 8s
+                barra.style.width = '0%'; 
             }, 50);
             
-            // VOLTA SOZINHO PRA PIZZA DEPOIS DE 8 SEGUNDOS
             timerReset = setTimeout(() => {
                 window.location.href = 'principal.html';
             }, 8000);
         }
 
         function acaoVoltar() {
-            clearTimeout(timerReset); // Para o relógio se alguém apertar voltar manual
-            if ('speechSynthesis' in window) window.speechSynthesis.cancel(); // Corta o áudio
+            clearTimeout(timerReset); 
+            if (audioAtual) audioAtual.pause(); 
 
             if (modoFocoAtivo) {
                 modoFocoAtivo = false;
