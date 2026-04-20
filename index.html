@@ -350,16 +350,9 @@
           fecharModal('modal-admin');
           abrirModal('modal-relatorio');
           
-          if (typeof RegulaMenteApp !== 'undefined' && RegulaMenteApp.gerarRelatorioTCC) {
-              RegulaMenteApp.gerarRelatorioTCC();
-          } else {
-              // DADOS FALSOS (MOCKUP) CORRIGIDOS (Soma 100%)
-              document.getElementById("grafico-zonas").innerHTML = `
-                <div class="heatmap-row zona-verde"><span class="heatmap-label">Zona Verde</span><div class="heatmap-bar"><div class="heatmap-fill" style="width: 45%;"></div></div><span class="heatmap-value">45%</span></div>
-                <div class="heatmap-row zona-amarela"><span class="heatmap-label">Zona Amarela</span><div class="heatmap-bar"><div class="heatmap-fill" style="width: 25%;"></div></div><span class="heatmap-value">25%</span></div>
-                <div class="heatmap-row zona-azul"><span class="heatmap-label">Zona Azul</span><div class="heatmap-bar"><div class="heatmap-fill" style="width: 20%;"></div></div><span class="heatmap-value">20%</span></div>
-                <div class="heatmap-row zona-vermelha"><span class="heatmap-label">Zona Vermelha</span><div class="heatmap-bar"><div class="heatmap-fill" style="width: 10%;"></div></div><span class="heatmap-value">10%</span></div>
-              `;
+          // Chama a função real de desenho de gráficos do app.js
+          if (typeof desenharGraficosTCC === 'function') {
+              desenharGraficosTCC();
           }
       }
 
@@ -423,7 +416,8 @@
 
       function entrarComo(nome) {
         localStorage.setItem("usuarioAtual", nome);
-        window.location.href = "principal.html";
+        // Uso do assign para garantir compatibilidade com PWA instalado
+        window.location.assign("principal.html");
       }
 
       /* ================= SEGURANÇA E DADOS ================= */
@@ -442,10 +436,12 @@
         const pinCorreto = localStorage.getItem("app_pin") || "1234";
 
         if (pinDigitado === pinCorreto) {
-          if (typeof RegulaMenteApp !== 'undefined') { RegulaMenteApp.clearHeatmap(); }
+          // Chama a função de apagar do app.js
+          if (typeof apagarHeatmap === 'function') { 
+              apagarHeatmap(); 
+          }
           fecharModal('modal-confirm-delete');
           voltarParaAdmin();
-          alert("✅ Dados de Heatmap do TCC apagados com sucesso.");
         } else { document.getElementById("erro-delete").style.display = "block"; }
       }
     </script>

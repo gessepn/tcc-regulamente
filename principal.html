@@ -206,30 +206,30 @@
         <div class="pizza-container">
           <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
             
-            <g class="fatia azul" data-zona="azul">
+            <g class="fatia azul" data-zona="Azul">
               <path d="M 500 500 L 0 500 A 500 500 0 0 1 146.45 146.45 Z" fill="#a8d1e1" stroke="#fefeff" stroke-width="12" />
-              <image href="/imagens/pizza/cansada.png" x="120" y="220" width="120" height="120" />
+              <image href="imagens/pizza/cansada.png" x="120" y="220" width="120" height="120" />
               <text x="180" y="380" text-anchor="middle" font-size="24" font-weight="bold" fill="#333">ZONA AZUL</text>
               <text x="180" y="415" text-anchor="middle" font-size="18" fill="#555">Triste / Cansada</text>
             </g>
 
-            <g class="fatia verde" data-zona="verde">
+            <g class="fatia verde" data-zona="Verde">
               <path d="M 500 500 L 146.45 146.45 A 500 500 0 0 1 500 0 Z" fill="#a8d1a8" stroke="#fefeff" stroke-width="12" />
-              <image href="/imagens/pizza/alegre.png" x="300" y="50" width="120" height="120" />
+              <image href="imagens/pizza/alegre.png" x="300" y="50" width="120" height="120" />
               <text x="360" y="210" text-anchor="middle" font-size="24" font-weight="bold" fill="#333">ZONA VERDE</text>
               <text x="360" y="245" text-anchor="middle" font-size="18" fill="#555">Feliz / Calma</text>
             </g>
 
-            <g class="fatia amarela" data-zona="amarela">
+            <g class="fatia amarela" data-zona="Amarela">
               <path d="M 500 500 L 500 0 A 500 500 0 0 1 853.55 146.45 Z" fill="#fdfd96" stroke="#fefeff" stroke-width="12" />
-              <image href="/imagens/pizza/preocupado.png" x="570" y="42" width="140" height="140" />
+              <image href="imagens/pizza/preocupado.png" x="570" y="42" width="140" height="140" />
               <text x="640" y="210" text-anchor="middle" font-size="24" font-weight="bold" fill="#333">ZONA AMARELA</text>
               <text x="640" y="245" text-anchor="middle" font-size="18" fill="#555">Agitada / Preocupada</text>
             </g>
 
-            <g class="fatia vermelha" data-zona="vermelha">
+            <g class="fatia vermelha" data-zona="Vermelha">
               <path d="M 500 500 L 853.55 146.45 A 500 500 0 0 1 1000 500 Z" fill="#ff9696" stroke="#fefeff" stroke-width="12" />
-              <image href="/imagens/pizza/irritação.png" x="760" y="220" width="120" height="120" />
+              <image href="imagens/pizza/irritação.png" x="760" y="220" width="120" height="120" />
               <text x="820" y="380" text-anchor="middle" font-size="24" font-weight="bold" fill="#333">ZONA VERMELHA</text>
               <text x="820" y="415" text-anchor="middle" font-size="18" fill="#555">Brava / Assustada</text>
             </g>
@@ -250,11 +250,10 @@
 
       function sairPerfil() {
         sessionStorage.removeItem("introVisto");
-        window.location.href = "index.html";
+        window.location.assign("index.html");
       }
 
       function iniciarIntro() {
-        aplicarHeatmapNasZonas();
         if (sessionStorage.getItem("introVisto") === "sim") {
           finalizarIntro(true);
           return;
@@ -267,7 +266,7 @@
             texto.style.opacity = 1;
           }, 500);
         }, 3000);
-        introTimer2 = setTimeout(() => { finalizarIntro(); }, 6000);
+        introTimer2 = setTimeout(() => { finalizarIntro(); }, 5000);
       }
 
       function finalizarIntro(imediato = false) {
@@ -293,27 +292,10 @@
           audioAtual.pause();
           audioAtual.currentTime = 0;
         }
-        audioAtual = new Audio(`audios/pizza/zona_${zona}.m4a`);
+        // Converte para minúsculo para bater com o nome do arquivo
+        const nomeArquivo = zona.toLowerCase();
+        audioAtual = new Audio(`audios/pizza/zona_${nomeArquivo}.m4a`);
         audioAtual.play().catch(e => console.log("Erro ao tocar áudio:", e));
-      }
-
-      function aplicarHeatmapNasZonas() {
-        if (typeof RegulaMenteApp === 'undefined') return;
-        const entradas = RegulaMenteApp.getHeatmapEntries("zonas");
-        const maximo = entradas.length ? entradas[0].count : 0;
-        document.querySelectorAll(".fatia").forEach((fatia) => {
-          const zona = fatia.getAttribute("data-zona");
-          const entrada = entradas.find((item) => item.key === zona);
-          const intensidade = entrada && maximo ? calcularIntensidade(entrada.count, maximo) : 0;
-          fatia.style.filter = intensidade
-            ? `drop-shadow(0px 0px ${18 + intensidade * 18}px rgba(0, 0, 0, ${0.18 + intensidade * 0.18}))`
-            : "none";
-          fatia.style.opacity = entrada ? String(0.82 + intensidade * 0.18) : "1";
-        });
-      }
-
-      function calcularIntensidade(count, maximo) {
-        return Math.max(0.18, Math.min(1, count / maximo));
       }
 
       window.addEventListener("load", iniciarIntro);
@@ -326,14 +308,16 @@
         fatia.addEventListener("click", () => {
           if (travado) return;
           travado = true;
+          
           tocarAudioZona(zona);
-          if (typeof RegulaMenteApp !== 'undefined') {
-            RegulaMenteApp.trackHeatmap("zonas", zona, {
-              label: `Zona ${zona.charAt(0).toUpperCase()}${zona.slice(1)}`,
-              page: "principal",
-            });
+          
+          // Chamar função real de registro do app.js
+          if (typeof registrarAcessoZona === 'function') {
+            registrarAcessoZona(zona);
           }
+          
           localStorage.setItem("zonaAtual", zona);
+          
           fatias.forEach((item) => {
             if (item === fatia) {
               item.classList.add("destacada");
@@ -341,9 +325,12 @@
               item.classList.add("apagada");
             }
           });
+          
           document.getElementById("titulo-principal").classList.add("titulo-apagado");
+          
           setTimeout(() => {
-            window.location.href = `acoes_${zona}.html`;
+            // Converte para minúsculo para bater com o nome do arquivo HTML
+            window.location.assign(`acoes_${zona.toLowerCase()}.html`);
           }, 1500);
         });
       });
