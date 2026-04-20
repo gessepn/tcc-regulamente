@@ -1,11 +1,19 @@
-// Service Worker básico para permitir a instalação do PWA
 const CACHE_NAME = 'regula-mente-v1';
 
-self.addEventListener('install', (e) => {
-    console.log('[Service Worker] Instalado');
+// Força a ativação imediata do Service Worker
+self.addEventListener('install', (event) => {
+    event.waitUntil(
+        caches.open(CACHE_NAME).then((cache) => {
+            // Se quiser que funcione offline depois, você listaria os arquivos aqui
+            return self.skipWaiting();
+        })
+    );
 });
 
-self.addEventListener('fetch', (e) => {
-    // Apenas repassa as requisições para o servidor
-    e.respondWith(fetch(e.request));
+self.addEventListener('activate', (event) => {
+    event.waitUntil(self.clients.claim());
+});
+
+self.addEventListener('fetch', (event) => {
+    event.respondWith(fetch(event.request));
 });
