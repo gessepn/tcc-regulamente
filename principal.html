@@ -79,36 +79,14 @@
         animation: respiracao 3s ease-in-out infinite;
       }
 
-      .circulo.azul {
-        background-color: #a8d1e1;
-        animation-delay: 0s;
-      }
-
-      .circulo.verde {
-        background-color: #a8d1a8;
-        animation-delay: 0.2s;
-      }
-
-      .circulo.amarela {
-        background-color: #fdfd96;
-        animation-delay: 0.4s;
-      }
-
-      .circulo.vermelha {
-        background-color: #ff9696;
-        animation-delay: 0.6s;
-      }
+      .circulo.azul { background-color: #a8d1e1; animation-delay: 0s; }
+      .circulo.verde { background-color: #a8d1a8; animation-delay: 0.2s; }
+      .circulo.amarela { background-color: #fdfd96; animation-delay: 0.4s; }
+      .circulo.vermelha { background-color: #ff9696; animation-delay: 0.6s; }
 
       @keyframes respiracao {
-        0%,
-        100% {
-          transform: scale(1);
-          opacity: 0.5;
-        }
-        50% {
-          transform: scale(1.8);
-          opacity: 1;
-        }
+        0%, 100% { transform: scale(1); opacity: 0.5; }
+        50% { transform: scale(1.8); opacity: 1; }
       }
 
       #btn-pular {
@@ -171,35 +149,18 @@
       .fatia {
         cursor: pointer;
         transform-origin: 500px 500px;
-        transition:
-          transform 0.3s ease,
-          filter 0.3s ease,
-          opacity 0.3s ease;
+        transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
       }
 
-      .fatia text {
+      .fatia text, .fatia image {
         pointer-events: none;
         font-family: "Varela Round", sans-serif;
       }
 
-      .fatia:hover {
-        transform: scale(1.02);
-      }
-
-      .fatia.apagada {
-        opacity: 0.1;
-        transform: scale(0.9);
-        pointer-events: none;
-      }
-
-      .fatia.destacada {
-        transform: scale(1.15);
-        z-index: 10;
-      }
-
-      .titulo-apagado {
-        opacity: 0;
-      }
+      .fatia:hover { transform: scale(1.02); }
+      .fatia.apagada { opacity: 0.1; transform: scale(0.9); pointer-events: none; }
+      .fatia.destacada { transform: scale(1.15); z-index: 10; }
+      .titulo-apagado { opacity: 0; }
 
       .infantile-details {
         position: absolute;
@@ -211,25 +172,8 @@
         opacity: 0.12;
       }
 
-      .detail-1 {
-        position: absolute;
-        top: 10%;
-        left: 5%;
-        width: 100px;
-        height: 100px;
-        background-color: #a9d1e1;
-        border-radius: 50%;
-      }
-
-      .detail-2 {
-        position: absolute;
-        bottom: 15%;
-        right: 10%;
-        width: 150px;
-        height: 150px;
-        background-color: #a8d1a8;
-        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-      }
+      .detail-1 { position: absolute; top: 10%; left: 5%; width: 100px; height: 100px; background-color: #a9d1e1; border-radius: 50%; }
+      .detail-2 { position: absolute; bottom: 15%; right: 10%; width: 150px; height: 150px; background-color: #a8d1a8; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
     </style>
   </head>
   <body oncontextmenu="return false;">
@@ -260,56 +204,33 @@
 
         <div class="pizza-container">
           <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
+            
             <g class="fatia azul" data-zona="azul">
-              <path
-                d="M 500 500 L 0 500 A 500 500 0 0 1 146.45 146.45 Z"
-                fill="#a8d1e1"
-                stroke="#fefeff"
-                stroke-width="12"
-              />
-              <text x="180" y="310" text-anchor="middle" font-size="70">😥</text>
-              <text x="180" y="370" text-anchor="middle" font-size="32" font-weight="bold" fill="#333">ZONA AZUL</text>
-              <text x="180" y="410" text-anchor="middle" font-size="22" fill="#555">Triste /</text>
-              <text x="180" y="440" text-anchor="middle" font-size="22" fill="#555">Cansada</text>
+              <path d="M 500 500 L 0 500 A 500 500 0 0 1 146.45 146.45 Z" fill="#a8d1e1" stroke="#fefeff" stroke-width="12" />
+              <image href="/imagens/pizza/cansada.png" x="120" y="220" width="120" height="120" />
+              <text x="180" y="380" text-anchor="middle" font-size="24" font-weight="bold" fill="#333">ZONA AZUL</text>
+              <text x="180" y="415" text-anchor="middle" font-size="18" fill="#555">Triste / Cansada</text>
             </g>
 
             <g class="fatia verde" data-zona="verde">
-              <path
-                d="M 500 500 L 146.45 146.45 A 500 500 0 0 1 500 0 Z"
-                fill="#a8d1a8"
-                stroke="#fefeff"
-                stroke-width="12"
-              />
-              <text x="360" y="140" text-anchor="middle" font-size="70">😊</text>
-              <text x="360" y="200" text-anchor="middle" font-size="32" font-weight="bold" fill="#333">ZONA VERDE</text>
-              <text x="360" y="240" text-anchor="middle" font-size="22" fill="#555">Feliz /</text>
-              <text x="360" y="270" text-anchor="middle" font-size="22" fill="#555">Calma</text>
+              <path d="M 500 500 L 146.45 146.45 A 500 500 0 0 1 500 0 Z" fill="#a8d1a8" stroke="#fefeff" stroke-width="12" />
+              <image href="/imagens/pizza/alegre.png" x="300" y="50" width="120" height="120" />
+              <text x="360" y="210" text-anchor="middle" font-size="24" font-weight="bold" fill="#333">ZONA VERDE</text>
+              <text x="360" y="245" text-anchor="middle" font-size="18" fill="#555">Feliz / Calma</text>
             </g>
 
             <g class="fatia amarela" data-zona="amarela">
-              <path
-                d="M 500 500 L 500 0 A 500 500 0 0 1 853.55 146.45 Z"
-                fill="#fdfd96"
-                stroke="#fefeff"
-                stroke-width="12"
-              />
-              <text x="640" y="140" text-anchor="middle" font-size="70">😟</text>
-              <text x="640" y="200" text-anchor="middle" font-size="32" font-weight="bold" fill="#333">ZONA AMARELA</text>
-              <text x="640" y="240" text-anchor="middle" font-size="22" fill="#555">Agitada /</text>
-              <text x="640" y="270" text-anchor="middle" font-size="22" fill="#555">Preocupada</text>
+              <path d="M 500 500 L 500 0 A 500 500 0 0 1 853.55 146.45 Z" fill="#fdfd96" stroke="#fefeff" stroke-width="12" />
+              <image href="/imagens/pizza/preocupado.png" x="570" y="42" width="140" height="140" />
+              <text x="640" y="210" text-anchor="middle" font-size="24" font-weight="bold" fill="#333">ZONA AMARELA</text>
+              <text x="640" y="245" text-anchor="middle" font-size="18" fill="#555">Agitada / Preocupada</text>
             </g>
 
             <g class="fatia vermelha" data-zona="vermelha">
-              <path
-                d="M 500 500 L 853.55 146.45 A 500 500 0 0 1 1000 500 Z"
-                fill="#ff9696"
-                stroke="#fefeff"
-                stroke-width="12"
-              />
-              <text x="820" y="310" text-anchor="middle" font-size="70">😡</text>
-              <text x="820" y="370" text-anchor="middle" font-size="32" font-weight="bold" fill="#333">ZONA VERMELHA</text>
-              <text x="820" y="410" text-anchor="middle" font-size="22" fill="#555">Brava /</text>
-              <text x="820" y="440" text-anchor="middle" font-size="22" fill="#555">Assustada</text>
+              <path d="M 500 500 L 853.55 146.45 A 500 500 0 0 1 1000 500 Z" fill="#ff9696" stroke="#fefeff" stroke-width="12" />
+              <image href="/imagens/pizza/irritação.png" x="760" y="220" width="120" height="120" />
+              <text x="820" y="380" text-anchor="middle" font-size="24" font-weight="bold" fill="#333">ZONA VERMELHA</text>
+              <text x="820" y="415" text-anchor="middle" font-size="18" fill="#555">Brava / Assustada</text>
             </g>
 
             <path d="M 380 500 A 120 120 0 0 1 620 500 Z" fill="#fefeff" />
@@ -321,6 +242,7 @@
     <script src="app.js"></script>
     <script>
       let introTimer1, introTimer2;
+      let audioAtual = null;
 
       const usuarioAtivo = localStorage.getItem("usuarioAtual") || "Convidado";
       document.getElementById("nome-usuario-ativo").innerText = `👤 ${usuarioAtivo}`;
@@ -332,14 +254,11 @@
 
       function iniciarIntro() {
         aplicarHeatmapNasZonas();
-
         if (sessionStorage.getItem("introVisto") === "sim") {
           finalizarIntro(true);
           return;
         }
-
         const texto = document.getElementById("texto-intro");
-
         introTimer1 = setTimeout(() => {
           texto.style.opacity = 0;
           setTimeout(() => {
@@ -347,21 +266,15 @@
             texto.style.opacity = 1;
           }, 500);
         }, 3000);
-
-        introTimer2 = setTimeout(() => {
-          finalizarIntro();
-        }, 6000);
+        introTimer2 = setTimeout(() => { finalizarIntro(); }, 6000);
       }
 
       function finalizarIntro(imediato = false) {
         clearTimeout(introTimer1);
         clearTimeout(introTimer2);
-
         sessionStorage.setItem("introVisto", "sim");
-
         const telaIntro = document.getElementById("tela-intro");
         const app = document.getElementById("conteudo-app");
-
         if (imediato) {
           telaIntro.style.display = "none";
           app.style.opacity = 1;
@@ -374,17 +287,23 @@
         }
       }
 
+      function tocarAudioZona(zona) {
+        if (audioAtual) {
+          audioAtual.pause();
+          audioAtual.currentTime = 0;
+        }
+        audioAtual = new Audio(`audios/pizza/zona_${zona}.m4a`);
+        audioAtual.play().catch(e => console.log("Erro ao tocar áudio:", e));
+      }
+
       function aplicarHeatmapNasZonas() {
         if (typeof RegulaMenteApp === 'undefined') return;
-        
         const entradas = RegulaMenteApp.getHeatmapEntries("zonas");
         const maximo = entradas.length ? entradas[0].count : 0;
-
         document.querySelectorAll(".fatia").forEach((fatia) => {
           const zona = fatia.getAttribute("data-zona");
           const entrada = entradas.find((item) => item.key === zona);
           const intensidade = entrada && maximo ? calcularIntensidade(entrada.count, maximo) : 0;
-          
           fatia.style.filter = intensidade
             ? `drop-shadow(0px 0px ${18 + intensidade * 18}px rgba(0, 0, 0, ${0.18 + intensidade * 0.18}))`
             : "none";
@@ -403,20 +322,17 @@
 
       fatias.forEach((fatia) => {
         const zona = fatia.getAttribute("data-zona");
-
         fatia.addEventListener("click", () => {
           if (travado) return;
           travado = true;
-
+          tocarAudioZona(zona);
           if (typeof RegulaMenteApp !== 'undefined') {
             RegulaMenteApp.trackHeatmap("zonas", zona, {
               label: `Zona ${zona.charAt(0).toUpperCase()}${zona.slice(1)}`,
               page: "principal",
             });
           }
-          
           localStorage.setItem("zonaAtual", zona);
-
           fatias.forEach((item) => {
             if (item === fatia) {
               item.classList.add("destacada");
@@ -424,9 +340,7 @@
               item.classList.add("apagada");
             }
           });
-
           document.getElementById("titulo-principal").classList.add("titulo-apagado");
-
           setTimeout(() => {
             window.location.href = `acoes_${zona}.html`;
           }, 1500);
