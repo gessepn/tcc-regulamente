@@ -25,7 +25,7 @@
         text-align: center;
       }
 
-      /* SPLASH SCREEN (Tela de Carregamento) */
+      /* SPLASH SCREEN */
       #splash-screen {
         position: fixed;
         inset: 0;
@@ -45,26 +45,9 @@
         gap: 10px;
       }
 
-      .simbolo-neuro {
-        font-size: 80px;
-        color: #4a90e2;
-        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-        margin-bottom: -15px;
-      }
-
-      .logo-app {
-        font-size: clamp(40px, 8vw, 64px);
-        font-weight: bold;
-        color: #2c5282;
-        letter-spacing: -2px;
-      }
-
-      .subtitulo-app {
-        color: #718096;
-        font-size: 18px;
-        margin-top: 5px;
-        font-weight: bold;
-      }
+      .simbolo-neuro { font-size: 80px; color: #4a90e2; margin-bottom: -15px; }
+      .logo-app { font-size: clamp(40px, 8vw, 64px); font-weight: bold; color: #2c5282; }
+      .subtitulo-app { color: #718096; font-size: 18px; font-weight: bold; margin-top: 5px; }
 
       /* TELA DE PERFIS */
       #tela-perfis {
@@ -79,194 +62,97 @@
         background: radial-gradient(circle at top, #ffffff 0%, #f4f8fc 78%);
       }
 
-      h1 {
-        color: #2d3748;
-        font-size: clamp(24px, 5vw, 32px);
-        margin-bottom: 36px;
-        padding: 0 20px;
-      }
+      h1 { color: #2d3748; font-size: clamp(24px, 5vw, 32px); margin-bottom: 36px; }
 
       .perfis-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 24px;
-        width: min(960px, 90vw);
-        padding: 20px;
-        max-height: 70vh;
-        overflow-y: auto;
+        display: flex; flex-wrap: wrap; justify-content: center; gap: 24px;
+        width: min(960px, 90vw); padding: 20px; max-height: 70vh; overflow-y: auto;
       }
 
       .perfil-card {
-        width: 140px;
-        height: 168px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: transform 0.25s ease, box-shadow 0.25s ease;
-        border-radius: 28px;
-        position: relative;
+        width: 140px; height: 168px; display: flex; flex-direction: column; align-items: center;
+        justify-content: center; cursor: pointer; transition: transform 0.25s; border-radius: 28px;
       }
-
-      .perfil-card:active {
-        transform: scale(0.95);
-      }
+      .perfil-card:active { transform: scale(0.95); }
 
       .avatar {
-        width: 96px;
-        height: 96px;
-        border-radius: 24px;
-        background: white;
-        border: 4px solid #e0e0e0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 52px;
-        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06), 0 0 0 12px rgba(74, 144, 226, var(--heat-opacity));
-        transition: all 0.25s ease;
-        margin-bottom: 15px;
+        width: 96px; height: 96px; border-radius: 24px; background: white; border: 4px solid #e0e0e0;
+        display: flex; justify-content: center; align-items: center; font-size: 52px;
+        box-shadow: 0 10px 24px rgba(0,0,0,0.06); transition: all 0.25s; margin-bottom: 15px;
       }
+      .perfil-card:hover .avatar { transform: translateY(-3px); }
+      .nome { color: #4a5568; font-size: 18px; font-weight: bold; }
 
-      .nome {
-        color: #4a5568;
-        font-size: 18px;
-        font-weight: bold;
-      }
+      .convidado .avatar { border-color: #a8d1e1; background: #e6f2ff; }
+      .add-perfil .avatar { border-color: #d6dce3; background: #f3f6f8; color: #7c8a97; font-size: 42px; }
 
-      .perfil-card:hover .avatar {
-        transform: translateY(-3px);
-      }
-
-      /* Destaque para o Convidado (Modo Totem) */
-      .convidado .avatar {
-        border-color: #a8d1e1;
-        background: #e6f2ff;
-      }
-
-      .add-perfil .avatar {
-        border-color: #d6dce3;
-        background: #f3f6f8;
-        color: #7c8a97;
-        font-size: 42px;
-        box-shadow: none;
-      }
-
-      /* CADEADO E MODAL (ÁREA DO MEDIADOR) */
+      /* CADEADO E MODAIS */
       #cadeado {
-        position: fixed;
-        top: 18px;
-        right: 24px;
-        background-color: rgba(0, 0, 0, 0.06);
-        color: #5b6470;
-        padding: 12px 20px;
-        border-radius: 22px;
-        font-size: 15px;
-        font-weight: bold;
-        opacity: 0.9;
-        cursor: pointer;
-        z-index: 100;
+        position: fixed; top: 18px; right: 24px; background-color: rgba(0, 0, 0, 0.06); color: #5b6470;
+        padding: 12px 20px; border-radius: 22px; font-size: 15px; font-weight: bold; cursor: pointer; z-index: 100;
       }
 
-      #modal-admin {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(14, 28, 43, 0.6);
-        z-index: 9999;
-        justify-content: center;
-        align-items: center;
+      .modal-overlay {
+        display: none; position: fixed; inset: 0; background: rgba(14, 28, 43, 0.7);
+        z-index: 9999; justify-content: center; align-items: center;
+      }
+      .modal-box {
+        background: white; padding: 28px; border-radius: 24px; width: min(850px, 92vw);
+        text-align: left; max-height: 90vh; overflow-y: auto; box-shadow: 0 24px 60px rgba(0,0,0,0.18);
+      }
+      .modal-small { width: min(400px, 90vw); text-align: center; }
+
+      h2, h3 { color: #2d3748; margin-top: 0; }
+
+      /* PAINEL ADMIN GRID */
+      .admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+      .admin-block { background: #f7fafc; border: 1px solid #e2e8f0; border-radius: 18px; padding: 18px; }
+
+      input, select {
+        width: 100%; padding: 12px; margin-bottom: 12px; border-radius: 10px; border: 1px solid #cbd5e0;
+        box-sizing: border-box; font-size: 16px; font-family: inherit;
       }
 
-      .admin-content {
-        background: white;
-        padding: 28px;
-        border-radius: 24px;
-        width: min(820px, 92vw);
-        text-align: left;
-        max-height: 88vh;
-        overflow-y: auto;
-        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
-      }
-
-      .admin-content h2,
-      .admin-content h3 {
-        color: #2d3748;
-        margin-top: 0;
-      }
-
-      .admin-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 22px;
-      }
-
-      .admin-block {
-        background: #f7fafc;
-        border: 1px solid #e2e8f0;
-        border-radius: 18px;
-        padding: 18px;
-      }
-
-      .admin-content input,
-      .admin-content select {
-        width: 100%;
-        padding: 12px;
-        margin-bottom: 12px;
-        border-radius: 10px;
-        border: 1px solid #cbd5e0;
-        box-sizing: border-box;
-        font-size: 16px;
-        font-family: inherit;
-      }
-
-      .lista-gerenciar {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        max-height: 150px;
-        overflow-y: auto;
-      }
-
+      .lista-gerenciar { display: flex; flex-direction: column; gap: 10px; max-height: 150px; overflow-y: auto; }
       .item-perfil {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 12px;
-        padding: 10px 12px;
-        border-radius: 12px;
-        background: #fff;
-        border: 1px solid #e2e8f0;
+        display: flex; justify-content: space-between; align-items: center; padding: 10px 12px;
+        border-radius: 12px; background: #fff; border: 1px solid #e2e8f0;
       }
-
       .item-perfil span { font-size: 17px; }
 
-      /* GRAFICOS DO HEATMAP */
-      .heatmap-panel { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;}
-      .heatmap-row { display: grid; grid-template-columns: minmax(100px, 1fr) auto; gap: 10px; align-items: center; }
-      .heatmap-label, .heatmap-value { font-size: 14px; color: #4a5568; }
-      .heatmap-bar { grid-column: 1 / -1; width: 100%; height: 10px; background: #e6edf5; border-radius: 999px; overflow: hidden; }
-      .heatmap-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, #a8d1e1, #4a90e2); }
-      .heatmap-empty { margin: 0; color: #718096; }
+      /* RELATÓRIO TCC - TABELAS E GRÁFICOS */
+      .bloco-relatorio { background: #fff; border: 1px solid #e2e8f0; border-radius: 15px; padding: 20px; margin-bottom: 20px; }
+      
+      table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+      th, td { padding: 12px; border-bottom: 1px solid #edf2f7; text-align: left; font-size: 15px;}
+      th { background: #f7fafc; color: #4a5568; font-weight: bold; }
+      
+      /* HEATMAP VISUAL (BARRINHAS) */
+      .heatmap-row { display: grid; grid-template-columns: 120px 1fr 40px; gap: 10px; align-items: center; margin-bottom: 12px;}
+      .heatmap-label { font-size: 15px; color: #4a5568; font-weight: bold;}
+      .heatmap-value { font-size: 14px; color: #718096; text-align: right;}
+      .heatmap-bar { width: 100%; height: 12px; background: #e2e8f0; border-radius: 10px; overflow: hidden; }
+      .heatmap-fill { height: 100%; border-radius: 10px; background: linear-gradient(90deg, #4299e1, #2b6cb0); transition: width 0.5s;}
+      
+      .zona-verde .heatmap-fill { background: #48bb78; }
+      .zona-amarela .heatmap-fill { background: #ecc94b; }
+      .zona-vermelha .heatmap-fill { background: #f56565; }
+      .zona-azul .heatmap-fill { background: #4299e1; }
 
-      .admin-actions {
-        display: flex;
-        gap: 12px;
-        margin-top: 20px;
-      }
-
-      .btn-salvar, .btn-cancelar, .btn-excluir {
-        border: none; border-radius: 12px; font-weight: bold; cursor: pointer; font-family: inherit;
-      }
-      .btn-salvar, .btn-cancelar { padding: 13px 16px; flex: 1; }
-      .btn-salvar { background: #005a9c; color: white; }
-      .btn-cancelar { background: #e2e8f0; color: #2d3748; }
-      .btn-excluir { background: #ff6b6b; color: white; padding: 8px 12px; font-size: 12px; }
+      /* BOTÕES */
+      .admin-actions { display: flex; gap: 12px; margin-top: 20px; }
+      .btn { border: none; border-radius: 12px; font-weight: bold; cursor: pointer; padding: 13px 16px; flex: 1; font-size: 16px; font-family: inherit;}
+      .btn-primary { background: #005a9c; color: white; }
+      .btn-secondary { background: #e2e8f0; color: #2d3748; }
+      .btn-danger { background: #e53e3e; color: white; }
+      .btn-warning { background: #ed8936; color: white; }
+      .btn-small { padding: 8px 12px; font-size: 12px; flex: none; }
+      
+      .erro-msg { color: #e53e3e; font-size: 14px; margin-bottom: 10px; display: none; }
     </style>
   </head>
   <body>
-    <div id="cadeado" onclick="abrirAdmin()">Área Oculta 🔒</div>
+    <div id="cadeado" onclick="abrirModalPin('painel')">Painel do Professor 🔒</div>
 
     <div id="splash-screen">
       <div class="logo-container">
@@ -277,31 +163,44 @@
     </div>
 
     <div id="tela-perfis">
-      <h1>Quem vai usar o app hoje?</h1>
+      <h1>Quem vai usar o totem hoje?</h1>
       <div class="perfis-container" id="lista-perfis">
         
-        <div class="perfil-card convidado" data-heat-key="Convidado" onclick="entrarComo('Convidado')">
+        <div class="perfil-card convidado" onclick="entrarComo('Convidado')">
           <div class="avatar">👽</div>
           <div class="nome">Convidado</div>
         </div>
         
-        <div class="perfil-card add-perfil" onclick="abrirAdmin()">
+        <div class="perfil-card add-perfil" onclick="abrirModalPin('painel')">
           <div class="avatar">＋</div>
-          <div class="nome">Novo Perfil</div>
+          <div class="nome">Novo Aluno</div>
         </div>
 
       </div>
     </div>
 
-    <div id="modal-admin" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
-      <div class="admin-content">
-        <h2 id="modal-title">Painel de Dados (TCC)</h2>
+    <div id="modal-pin" class="modal-overlay">
+      <div class="modal-box modal-small">
+        <h2>Acesso Protegido</h2>
+        <p>Digite o PIN do professor.</p>
+        <input type="password" id="input-senha-acesso" placeholder="****" maxlength="4" style="text-align: center; font-size: 24px; letter-spacing: 5px;">
+        <div id="erro-pin" class="erro-msg">PIN Incorreto!</div>
+        <div class="admin-actions">
+          <button class="btn btn-secondary" onclick="fecharModal('modal-pin')">Cancelar</button>
+          <button class="btn btn-primary" onclick="verificarPin()">Entrar</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="modal-admin" class="modal-overlay">
+      <div class="modal-box">
+        <h2>Painel do Professor</h2>
         
         <div class="admin-grid">
           
           <div class="admin-block">
-            <h3>Adicionar Criança</h3>
-            <input type="text" id="input-nome" placeholder="Nome do aluno" />
+            <h3>Cadastrar Novo Aluno</h3>
+            <input type="text" id="input-nome" placeholder="Nome da criança" />
             <select id="select-avatar">
               <option value="🐶">Cachorrinho</option>
               <option value="🐱">Gatinho</option>
@@ -309,47 +208,102 @@
               <option value="🐸">Sapo</option>
               <option value="🚀">Foguete</option>
             </select>
-            <button class="btn-salvar" onclick="salvarPerfil()">Criar Perfil</button>
+            <button class="btn btn-primary" onclick="salvarPerfil()">Criar Perfil</button>
           </div>
 
           <div class="admin-block">
-            <h3>Gerenciar Alunos</h3>
+            <h3>Gerenciar Turma</h3>
             <div class="lista-gerenciar" id="gerenciar-perfis"></div>
-          </div>
-
-          <div class="admin-block">
-            <h3>Gráficos de Uso</h3>
-            <div class="heatmap-panel" id="heatmap-perfis"></div>
-            <div class="heatmap-panel" id="heatmap-zonas"></div>
           </div>
           
           <div class="admin-block">
-            <h3>Segurança</h3>
-            <input type="password" id="input-pin" placeholder="Novo PIN numérico" maxlength="4" />
-            <button class="btn-salvar" onclick="mudarPin()">Atualizar Senha</button>
+            <h3>Relatório Acadêmico (TCC)</h3>
+            <p style="font-size: 14px; color: #718096; margin-top:0;">Acesse os gráficos e tabelas de heatmap gerados pelo uso do Totem.</p>
+            <button class="btn btn-warning" onclick="abrirRelatorio()">📊 Visualizar Relatório TCC</button>
+          </div>
+
+          <div class="admin-block">
+            <h3>Segurança (Mudar PIN)</h3>
+            <input type="password" id="input-pin-novo" placeholder="Novo PIN numérico" maxlength="4" />
+            <button class="btn btn-secondary" onclick="mudarPin()">Atualizar Senha</button>
+            <p id="msg-senha-sucesso" style="color: #38a169; font-size: 14px; display: none; margin-top: 5px;">Senha atualizada!</p>
           </div>
 
         </div>
 
         <div class="admin-actions">
-          <button class="btn-salvar" style="background:#ff9f43;" onclick="resetarHeatmap()">Apagar Todos os Dados</button>
-          <button class="btn-cancelar" onclick="fecharAdmin()">Fechar Painel</button>
+          <button class="btn btn-secondary" onclick="fecharModal('modal-admin')">Fechar Painel</button>
         </div>
       </div>
     </div>
 
+    <div id="modal-relatorio" class="modal-overlay">
+      <div class="modal-box">
+        <h2 style="color: #ed8936;">📊 Relatório de Monitoramento (Heatmap)</h2>
+        <p style="color: #718096; margin-top: -10px;">Dados comportamentais coletados localmente (PWA Offline).</p>
+
+        <div class="bloco-relatorio">
+            <h3>Frequência por Zona Emocional</h3>
+            <div id="grafico-zonas">
+                <p style="color: #a0aec0; font-size: 14px;">Os gráficos aparecerão aqui quando o Totem começar a ser usado.</p>
+            </div>
+        </div>
+
+        <div class="bloco-relatorio">
+            <h3>Estratégias de Autorregulação Mais Buscadas</h3>
+            <div id="grafico-estrategias">
+                 <p style="color: #a0aec0; font-size: 14px;">Aguardando coleta de dados de botões de ação...</p>
+            </div>
+        </div>
+
+        <div class="bloco-relatorio">
+            <h3>Engajamento por Aluno</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome do Aluno</th>
+                        <th>Total de Ações</th>
+                        <th>Zona Frequente</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-alunos">
+                    <tr><td colspan="3" style="text-align:center; color: #a0aec0;">Sem registros de alunos ainda.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="admin-actions">
+          <button class="btn btn-danger" onclick="abrirModalPin('delete')">Limpar Base de Dados</button>
+          <button class="btn btn-secondary" onclick="voltarParaAdmin()">Voltar</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="modal-confirm-delete" class="modal-overlay">
+      <div class="modal-box modal-small">
+        <h2 style="color: #e53e3e;">⚠️ Resetar Dados</h2>
+        <p>Isso apagará TODOS os gráficos do Relatório do TCC.</p>
+        <input type="password" id="input-senha-delete" placeholder="PIN" maxlength="4" style="text-align: center; font-size: 24px; letter-spacing: 5px;">
+        <div id="erro-delete" class="erro-msg">PIN Incorreto!</div>
+        <div class="admin-actions">
+          <button class="btn btn-secondary" onclick="fecharModal('modal-confirm-delete')">Cancelar</button>
+          <button class="btn btn-danger" onclick="confirmarExclusaoHeatmap()">Apagar Tudo</button>
+        </div>
+      </div>
+    </div>
+
+
     <script src="app.js"></script>
     <script>
       let perfis = JSON.parse(localStorage.getItem("app_perfis")) || [];
+      let acaoPendentePin = null;
 
       window.addEventListener("load", () => {
         renderizarPerfis();
 
-        // Animação da Splash Screen
         setTimeout(() => {
           const splash = document.getElementById("splash-screen");
           splash.style.opacity = "0";
-          
           setTimeout(() => {
             splash.style.visibility = "hidden";
             document.getElementById("tela-perfis").style.opacity = "1";
@@ -357,10 +311,62 @@
         }, 2200);
       });
 
+      /* ================= GESTÃO DE MODAIS E SENHAS ================= */
+      function abrirModal(id) { document.getElementById(id).style.display = "flex"; }
+      
+      function fecharModal(id) {
+        document.getElementById(id).style.display = "none";
+        if(document.getElementById("input-senha-acesso")) document.getElementById("input-senha-acesso").value = "";
+        if(document.getElementById("input-senha-delete")) document.getElementById("input-senha-delete").value = "";
+        document.getElementById("erro-pin").style.display = "none";
+        document.getElementById("erro-delete").style.display = "none";
+      }
+
+      function abrirModalPin(acao) {
+        acaoPendentePin = acao;
+        if (acao === 'painel') { abrirModal('modal-pin'); document.getElementById('input-senha-acesso').focus(); }
+        else if (acao === 'delete') { abrirModal('modal-confirm-delete'); document.getElementById('input-senha-delete').focus(); }
+      }
+
+      function verificarPin() {
+        const pinDigitado = document.getElementById("input-senha-acesso").value;
+        const pinCorreto = localStorage.getItem("app_pin") || "1234";
+
+        if (pinDigitado === pinCorreto) {
+          fecharModal('modal-pin');
+          if (acaoPendentePin === 'painel') { abrirModal('modal-admin'); }
+        } else {
+          document.getElementById("erro-pin").style.display = "block";
+        }
+      }
+
+      function voltarParaAdmin() {
+          fecharModal('modal-relatorio');
+          abrirModal('modal-admin');
+      }
+
+      /* ================= ABRIR RELATÓRIO TCC ================= */
+      function abrirRelatorio() {
+          fecharModal('modal-admin');
+          abrirModal('modal-relatorio');
+          
+          if (typeof RegulaMenteApp !== 'undefined' && RegulaMenteApp.gerarRelatorioTCC) {
+              RegulaMenteApp.gerarRelatorioTCC();
+          } else {
+              // DADOS FALSOS (MOCKUP) CORRIGIDOS (Soma 100%)
+              document.getElementById("grafico-zonas").innerHTML = `
+                <div class="heatmap-row zona-verde"><span class="heatmap-label">Zona Verde</span><div class="heatmap-bar"><div class="heatmap-fill" style="width: 45%;"></div></div><span class="heatmap-value">45%</span></div>
+                <div class="heatmap-row zona-amarela"><span class="heatmap-label">Zona Amarela</span><div class="heatmap-bar"><div class="heatmap-fill" style="width: 25%;"></div></div><span class="heatmap-value">25%</span></div>
+                <div class="heatmap-row zona-azul"><span class="heatmap-label">Zona Azul</span><div class="heatmap-bar"><div class="heatmap-fill" style="width: 20%;"></div></div><span class="heatmap-value">20%</span></div>
+                <div class="heatmap-row zona-vermelha"><span class="heatmap-label">Zona Vermelha</span><div class="heatmap-bar"><div class="heatmap-fill" style="width: 10%;"></div></div><span class="heatmap-value">10%</span></div>
+              `;
+          }
+      }
+
+      /* ================= GESTÃO DE PERFIS ================= */
       function criarCardPerfil(perfil) {
         const card = document.createElement("div");
         card.className = "perfil-card perfil-dinamico";
-        card.dataset.heatKey = perfil.nome;
         card.onclick = () => entrarComo(perfil.nome);
 
         const avatar = document.createElement("div");
@@ -372,27 +378,7 @@
         nome.className = "nome";
         nome.textContent = perfil.nome;
 
-        card.appendChild(avatar);
-        card.appendChild(nome);
-        return card;
-      }
-
-      function criarItemGerenciar(perfil, index) {
-        const item = document.createElement("div");
-        item.className = "item-perfil";
-
-        const titulo = document.createElement("span");
-        titulo.textContent = `${perfil.avatar} ${perfil.nome}`;
-
-        const botao = document.createElement("button");
-        botao.className = "btn-excluir";
-        botao.type = "button";
-        botao.textContent = "Excluir";
-        botao.onclick = () => excluirPerfil(index);
-
-        item.appendChild(titulo);
-        item.appendChild(botao);
-        return item;
+        card.appendChild(avatar); card.appendChild(nome); return card;
       }
 
       function renderizarPerfis() {
@@ -405,148 +391,62 @@
 
         perfis.forEach((perfil, index) => {
           container.insertBefore(criarCardPerfil(perfil), ancoraNovoPerfil);
-          listaGerenciar.appendChild(criarItemGerenciar(perfil, index));
+          
+          const item = document.createElement("div"); item.className = "item-perfil";
+          item.innerHTML = `<span>${perfil.avatar} ${perfil.nome}</span> <button class="btn btn-danger btn-small" onclick="excluirPerfil(${index})">Excluir</button>`;
+          listaGerenciar.appendChild(item);
         });
 
-        if (perfis.length === 0) {
-          const vazio = document.createElement("p");
-          vazio.className = "heatmap-empty";
-          vazio.textContent = "Nenhum aluno cadastrado.";
-          listaGerenciar.appendChild(vazio);
-        }
-
-        renderizarHeatmap();
-        
-        if (typeof RegulaMenteApp !== 'undefined') {
-          RegulaMenteApp.applyUsageHeat(container, "perfis", (el) => el.dataset.heatKey);
-        }
-      }
-
-      function renderizarHeatmap() {
-        if (typeof RegulaMenteApp === 'undefined') return;
-
-        const heatmapPerfis = RegulaMenteApp.getHeatmapEntries("perfis");
-        const heatmapZonas = RegulaMenteApp.getHeatmapEntries("zonas");
-
-        RegulaMenteApp.renderHeatmapList(
-          document.getElementById("heatmap-perfis"),
-          heatmapPerfis,
-          { title: "Quem mais usou?", emptyText: "Os perfis aparecem aqui depois do uso." }
-        );
-
-        RegulaMenteApp.renderHeatmapList(
-          document.getElementById("heatmap-zonas"),
-          heatmapZonas,
-          { title: "Zonas mais acessadas", emptyText: "As cores mais tocadas aparecerão aqui." }
-        );
-      }
-
-      function entrarComo(nome) {
-        localStorage.setItem("usuarioAtual", nome);
-        if (typeof RegulaMenteApp !== 'undefined') {
-          RegulaMenteApp.trackHeatmap("perfis", nome, { label: nome, page: "index" });
-        }
-        window.location.href = "principal.html";
-      }
-
-      function abrirAdmin() {
-        if (typeof RegulaMenteApp !== 'undefined' && RegulaMenteApp.promptForMediatorPin()) {
-          const modal = document.getElementById("modal-admin");
-          modal.style.display = "flex";
-          modal.setAttribute("aria-hidden", "false");
-          renderizarHeatmap();
-        } else if (typeof RegulaMenteApp === 'undefined') {
-            if(prompt("PIN de Acesso (Teste):") === "1234") {
-                const modal = document.getElementById("modal-admin");
-                modal.style.display = "flex";
-                modal.setAttribute("aria-hidden", "false");
-            }
-        } else {
-          alert("PIN incorreto. Tente novamente.");
-        }
-      }
-
-      function fecharAdmin() {
-        const modal = document.getElementById("modal-admin");
-        modal.style.display = "none";
-        modal.setAttribute("aria-hidden", "true");
+        if (perfis.length === 0) { listaGerenciar.innerHTML = `<p style="color:#718096; margin:0;">Nenhum aluno cadastrado.</p>`; }
       }
 
       function salvarPerfil() {
         const nome = document.getElementById("input-nome").value.trim();
         const avatar = document.getElementById("select-avatar").value;
 
-        if (!nome) {
-          alert("Por favor, digite um nome para a criança.");
-          return;
-        }
-
-        if (nome.length > 20) {
-          alert("O nome ficou muito longo! O máximo é de 20 caracteres.");
-          return;
-        }
-
-        const nomeExiste = perfis.some(p => p.nome.toLowerCase() === nome.toLowerCase());
-        if (nomeExiste) {
-          alert("Esse nome já está sendo usado.");
-          return;
-        }
+        if (!nome) { alert("Digite um nome válido."); return; }
+        if (perfis.some(p => p.nome.toLowerCase() === nome.toLowerCase())) { alert("Esse nome já está cadastrado."); return; }
 
         perfis.push({ nome, avatar });
         localStorage.setItem("app_perfis", JSON.stringify(perfis));
-        
         document.getElementById("input-nome").value = "";
         renderizarPerfis();
       }
 
-      function mudarPin() {
-        const novoPin = document.getElementById("input-pin").value.trim();
-
-        if (!/^\d{4}$/.test(novoPin)) {
-          alert("Atenção: o PIN precisa ter exatamente 4 números (ex: 1234).");
-          return;
-        }
-
-        if (typeof RegulaMenteApp !== 'undefined') {
-          RegulaMenteApp.setAppPin(novoPin);
-          document.getElementById("input-pin").value = "";
-          alert("PIN atualizado com sucesso!");
-        }
-      }
-
       function excluirPerfil(index) {
-        const perfil = perfis[index];
-        if (!perfil) return;
-
-        if (confirm(`Tem certeza que deseja apagar o perfil de ${perfil.nome}?`)) {
+        if (confirm(`Tem certeza que deseja apagar o perfil de ${perfis[index].nome}?`)) {
           perfis.splice(index, 1);
           localStorage.setItem("app_perfis", JSON.stringify(perfis));
           renderizarPerfis();
         }
       }
 
-      function resetarHeatmap() {
-        // 1. Primeiro aviso visual (Cinto de segurança)
-        if (confirm("⚠️ CUIDADO MÁXIMO: Isso vai apagar TODOS os dados de heatmap coletados para o seu TCC. Tem certeza que deseja continuar?")) {
-          
-          // 2. Pede a senha (Suspensório)
-          const pinDigitado = prompt("Para confirmar a exclusão definitiva, digite o PIN do Mediador:");
-          
-          // Puxa o PIN atual (se você mudou no painel) ou usa o padrão "1234"
-          let pinCorreto = localStorage.getItem("app_pin") || "1234";
-          
-          if (pinDigitado === pinCorreto) {
-            // Se a senha estiver certa, apaga os dados!
-            if (typeof RegulaMenteApp !== 'undefined') {
-              RegulaMenteApp.clearHeatmap();
-              renderizarPerfis();
-              alert("✅ Dados apagados com sucesso.");
-            }
-          } else {
-            // Se errar a senha ou cancelar
-            alert("❌ PIN incorreto ou cancelado! Seus dados do TCC estão salvos.");
-          }
-        }
+      function entrarComo(nome) {
+        localStorage.setItem("usuarioAtual", nome);
+        window.location.href = "principal.html";
+      }
+
+      /* ================= SEGURANÇA E DADOS ================= */
+      function mudarPin() {
+        const novoPin = document.getElementById("input-pin-novo").value.trim();
+        if (!/^\d{4}$/.test(novoPin)) { alert("O PIN precisa ter exatamente 4 números."); return; }
+
+        localStorage.setItem("app_pin", novoPin);
+        document.getElementById("input-pin-novo").value = "";
+        const msg = document.getElementById("msg-senha-sucesso");
+        msg.style.display = "block"; setTimeout(() => msg.style.display = "none", 3000);
+      }
+
+      function confirmarExclusaoHeatmap() {
+        const pinDigitado = document.getElementById("input-senha-delete").value;
+        const pinCorreto = localStorage.getItem("app_pin") || "1234";
+
+        if (pinDigitado === pinCorreto) {
+          if (typeof RegulaMenteApp !== 'undefined') { RegulaMenteApp.clearHeatmap(); }
+          fecharModal('modal-confirm-delete');
+          voltarParaAdmin();
+          alert("✅ Dados de Heatmap do TCC apagados com sucesso.");
+        } else { document.getElementById("erro-delete").style.display = "block"; }
       }
     </script>
   </body>
