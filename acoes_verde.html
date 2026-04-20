@@ -17,15 +17,19 @@
         .container-botoes { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; width: 100%; max-width: 620px; transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
         
         .acao { --heat-opacity: 0.12; flex: 1 1 calc(50% - 15px); max-width: calc(50% - 15px); height: 132px; border-radius: 25px; color: #333; font-size: 18px; font-weight: bold; cursor: pointer; border: 4px solid white; background: linear-gradient(145deg, #cce5cc, #a8d1a8); box-shadow: 0 4px 6px rgba(0,0,0,0.05), 0 0 0 12px rgba(255,255,255,var(--heat-opacity)); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); overflow: hidden; box-sizing: border-box; padding: 10px; }
-        .acao span { font-size: 45px; margin-bottom: 10px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
-        .acao:active { transform: scale(0.95); }
         
+        .icone-botao { width: 65px; height: 65px; object-fit: contain; margin-bottom: 10px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .acao span { font-size: 45px; margin-bottom: 10px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); } 
+        
+        .acao:active { transform: scale(0.95); }
         .acao.oculto { flex: 0 0 0%; max-width: 0; height: 0; padding: 0; margin: 0; border-width: 0; opacity: 0; transform: scale(0.8); pointer-events: none; }
+        
         .acao.selecionado { flex: 1 1 100%; max-width: 100%; height: 350px; transform: scale(1.02); pointer-events: none; box-shadow: 0 12px 26px rgba(0,0,0,0.16); font-size: 26px; }
+        .acao.selecionado .icone-botao { width: 130px; height: 130px; margin-bottom: 20px; }
         .acao.selecionado span { font-size: 85px; margin-bottom: 20px; }
         
         .painel-feedback { width: 0; opacity: 0; padding: 0; margin-left: 0; overflow: hidden; background: white; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; border-left: 0 solid #f0fdf0; transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
-        .gif-recompensa { width: 200px; height: 200px; object-fit: cover; border-radius: 20px; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .gif-recompensa { width: 200px; height: 200px; object-fit: contain; border-radius: 20px; margin-bottom: 15px; }
         .texto-feedback { color: #008A00; font-size: 22px; font-weight: bold; margin: 0 10px 15px 10px; }
         
         .timer-container { width: 80%; height: 12px; background-color: #e0e0e0; border-radius: 10px; overflow: hidden; margin-top: 10px; }
@@ -39,7 +43,6 @@
         .btn-controle:active { transform: scale(0.95); }
         .titulo-oculto { opacity: 0; height: 0; margin: 0; overflow: hidden; }
 
-        /* PAINEL ADMIN */
         #cadeado { position: fixed; top: 18px; right: 24px; background-color: rgba(0, 0, 0, 0.05); color: #666; padding: 12px 20px; border-radius: 20px; font-size: 15px; font-weight: bold; cursor: pointer; z-index: 100; }
         #modal-admin { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.72); z-index: 9999; justify-content: center; align-items: center; }
         .admin-content { background: white; padding: 25px; border-radius: 20px; width: min(760px, 92vw); text-align: left; max-height: 88vh; overflow-y: auto; box-sizing: border-box; }
@@ -64,9 +67,13 @@
             h1 { font-size: 22px; margin-bottom: 20px; margin-top: 40px; }
             .container-botoes { gap: 10px; }
             .acao { height: 100px; font-size: 14px; flex: 1 1 calc(50% - 10px); max-width: calc(50% - 10px); }
+            .icone-botao { width: 45px; height: 45px; }
             .acao span { font-size: 35px; margin-bottom: 5px; }
+            
             .acao.selecionado { height: 180px; font-size: 22px; }
+            .acao.selecionado .icone-botao { width: 80px; height: 80px; }
             .acao.selecionado span { font-size: 55px; margin-bottom: 10px; }
+            
             .area-interativa { flex-direction: column; align-items: center; }
             .area-interativa.modo-foco .container-botoes { width: 100%; max-width: 100%; margin-bottom: 20px; }
             .area-interativa.modo-foco .painel-feedback { width: 100%; margin-left: 0; padding: 20px; border-left: none; border-top: 8px solid #a8d1a8; }
@@ -107,16 +114,28 @@
         
         <div class="area-interativa" id="area-interativa">
             <div class="container-botoes" id="grid-botoes">
-                <button class="acao" data-heat-key="verde:ler" onclick="selecionarAcao('ler', this)"><span>📚</span>Ler um livro</button>
-                <button class="acao" data-heat-key="verde:tarefa" onclick="selecionarAcao('tarefa', this)"><span>🖍️</span>Fazer a tarefa</button>
-                <button class="acao" data-heat-key="verde:ajudar" onclick="selecionarAcao('ajudar', this)"><span>🧑‍🏫</span>Ajudar o professor</button>
-                <button class="acao" data-heat-key="verde:comer" onclick="selecionarAcao('comer', this)"><span>🍎</span>Comer algo</button>
-                <button class="acao" data-heat-key="verde:brincar" onclick="selecionarAcao('brincar', this)"><span>🤝</span>Brincar com amigo</button>
-                <button class="acao" data-heat-key="verde:tablet" onclick="selecionarAcao('tablet', this)"><span>📱</span>Jogar no tablet</button>
+                <button class="acao" data-heat-key="verde:ler" onclick="selecionarAcao('ler', this)">
+                    <img src="/imagens/zona_verde/ler.png" class="icone-botao" alt="Ler">Ler um livro
+                </button>
+                <button class="acao" data-heat-key="verde:tarefa" onclick="selecionarAcao('tarefa', this)">
+                    <img src="/imagens/zona_verde/atividade.png" class="icone-botao" alt="Tarefa">Fazer a tarefa
+                </button>
+                <button class="acao" data-heat-key="verde:ajudar" onclick="selecionarAcao('ajudar', this)">
+                    <img src="/imagens/zona_verde/professor.png" class="icone-botao" alt="Ajudar">Ajudar o professor
+                </button>
+                <button class="acao" data-heat-key="verde:comer" onclick="selecionarAcao('comer', this)">
+                    <img src="/imagens/zona_verde/comer.png" class="icone-botao" alt="Comer">Comer algo
+                </button>
+                <button class="acao" data-heat-key="verde:brincar" onclick="selecionarAcao('brincar', this)">
+                    <img src="/imagens/zona_verde/brincar.png" class="icone-botao" alt="Brincar">Brincar com amigo
+                </button>
+                <button class="acao" data-heat-key="verde:tablet" onclick="selecionarAcao('tablet', this)">
+                    <img src="/imagens/zona_verde/jogar no tablet.png" class="icone-botao" alt="Tablet">Jogar no tablet
+                </button>
             </div>
             
             <div class="painel-feedback" id="painel-mediador">
-                <img src="" id="gif-recompensa" class="gif-recompensa" alt="Animação Legal">
+                <img src="" id="gif-recompensa" class="gif-recompensa" alt="Imagem Legal">
                 <div class="texto-feedback" id="texto-feedback">Muito bem!</div>
                 <div class="timer-container">
                     <div class="timer-barra" id="timer-barra"></div>
@@ -136,43 +155,42 @@
         let timerReset;
         let audioAtual = null;
         
-        // Agora temos: audio (toca o som) e textoVisual (aparece escrito)
         const orientacoes = {
             "tarefa": {
                 "label": "Fazer a tarefa",
                 "textoVisual": "Muito bem! Vamos fazer a tarefa com bastante capricho!",
                 "audio": "/audios/zona_verde/Tarefa.m4a",
-                "gif": "https://media.giphy.com/media/3oKIPnAiaCRi8b9tZ2/giphy.gif"
+                "imagem": "/imagens/zona_verde/atividade.png"
             },
             "comer": {
                 "label": "Comer algo",
                 "textoVisual": "Que delícia! Hora de um lanchinho bem gostoso!",
                 "audio": "/audios/zona_verde/Comer_algo.m4a",
-                "gif": "https://media.giphy.com/media/VvQvOFqPjZLi/giphy.gif" 
+                "imagem": "/imagens/zona_verde/comer.png" 
             },
             "ajudar": {
                 "label": "Ajudar o professor",
                 "textoVisual": "Você é um ótimo ajudante! O professor vai adorar.",
                 "audio": "/audios/zona_verde/Ajudar_professor.m4a",
-                "gif": "https://media.giphy.com/media/xT0xezQGU5xCDJuCPe/giphy.gif" 
+                "imagem": "/imagens/zona_verde/professor.png" 
             },
             "tablet": {
                 "label": "Jogar no tablet",
                 "textoVisual": "Hora da diversão! Vamos jogar um pouco.",
                 "audio": "/audios/zona_verde/Jogar_tablet.m4a",
-                "gif": "https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif" 
+                "imagem": "/imagens/zona_verde/jogar no tablet.png" 
             },
             "brincar": {
                 "label": "Brincar com amigo",
                 "textoVisual": "Que legal! Chame seu amigo para brincarem juntos!",
                 "audio": "/audios/zona_verde/Brincar.m4a",
-                "gif": "https://media.giphy.com/media/3oEjI4sFlp73fvEYgw/giphy.gif" 
+                "imagem": "/imagens/zona_verde/brincar.png" 
             },
             "ler": {
                 "label": "Ler um livro",
                 "textoVisual": "Excelente escolha! Uma boa história faz a gente viajar.",
                 "audio": "/audios/zona_verde/Ler_livro.m4a",
-                "gif": "https://media.giphy.com/media/11c7UUfNvw23sY/giphy.gif" 
+                "imagem": "/imagens/zona_verde/ler.png" 
             }
         };
         
@@ -231,7 +249,7 @@
                     label: dados.nome,
                     textoVisual: dados.textoVisual || "Ótima escolha!",
                     audio: "/audios/zona_verde/Customizado.m4a", 
-                    gif: "https://media.giphy.com/media/L0z2XEn1zI8Tq4D2x6/giphy.gif"
+                    imagem: "/imagens/zona_verde/atividade.png" 
                 };
                 
                 const btn = criarBotaoAcao('custom', dados.emoji, dados.nome);
@@ -324,23 +342,25 @@
                 }
             });
             
-            // Juntamos o melhor dos dois mundos: Toca o áudio e exibe o texto visual!
             document.getElementById('texto-feedback').textContent = orientacao.textoVisual;
-            document.getElementById('gif-recompensa').src = orientacao.gif;
+            document.getElementById('gif-recompensa').src = orientacao.imagem;
             tocarAudio(orientacao.audio);
             
             const barra = document.getElementById('timer-barra');
             barra.style.transition = 'none';
             barra.style.width = '100%'; 
             
+            // Corrige o bug do tempo dinâmico garantindo fallback seguro para 8s
+            const tempoDaAcao = orientacao.tempoEspera || 8000;
+            
             setTimeout(() => {
-                barra.style.transition = 'width 8s linear';
+                barra.style.transition = `width ${tempoDaAcao / 1000}s linear`; 
                 barra.style.width = '0%'; 
             }, 50);
             
             timerReset = setTimeout(() => {
                 window.location.href = 'principal.html';
-            }, 8000);
+            }, tempoDaAcao); 
         }
 
         function acaoVoltar() {

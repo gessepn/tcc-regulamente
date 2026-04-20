@@ -17,19 +17,22 @@
         .container-botoes { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; width: 100%; max-width: 620px; transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
         
         .acao { --heat-opacity: 0.12; flex: 1 1 calc(50% - 15px); max-width: calc(50% - 15px); height: 132px; border-radius: 25px; color: #333; font-size: 18px; font-weight: bold; cursor: pointer; border: 4px solid white; background: linear-gradient(145deg, #fdfd96, #efef75); box-shadow: 0 4px 6px rgba(0,0,0,0.05), 0 0 0 12px rgba(255,255,255,var(--heat-opacity)); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); overflow: hidden; box-sizing: border-box; padding: 10px; }
-        .acao span { font-size: 45px; margin-bottom: 10px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
-        .acao:active { transform: scale(0.95); }
         
+        /* Estilos para as imagens (ARASAAC) e suporte a Emojis customizados */
+        .icone-botao { width: 65px; height: 65px; object-fit: contain; margin-bottom: 10px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .acao span { font-size: 45px; margin-bottom: 10px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); } 
+        
+        .acao:active { transform: scale(0.95); }
         .acao.oculto { flex: 0 0 0%; max-width: 0; height: 0; padding: 0; margin: 0; border-width: 0; opacity: 0; transform: scale(0.8); pointer-events: none; }
+        
         .acao.selecionado { flex: 1 1 100%; max-width: 100%; height: 350px; transform: scale(1.02); pointer-events: none; box-shadow: 0 12px 26px rgba(0,0,0,0.16); font-size: 26px; }
+        .acao.selecionado .icone-botao { width: 130px; height: 130px; margin-bottom: 20px; }
         .acao.selecionado span { font-size: 85px; margin-bottom: 20px; }
         
-        /* NOVO PAINEL DE FEEDBACK LÚDICO */
         .painel-feedback { width: 0; opacity: 0; padding: 0; margin-left: 0; overflow: hidden; background: white; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; border-left: 0 solid #fffde6; transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
-        .gif-recompensa { width: 200px; height: 200px; object-fit: cover; border-radius: 20px; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .gif-recompensa { width: 200px; height: 200px; object-fit: contain; border-radius: 20px; margin-bottom: 15px; }
         .texto-feedback { color: #b29500; font-size: 22px; font-weight: bold; margin: 0 10px 15px 10px; }
         
-        /* BARRA DE PROGRESSO DO TEMPO */
         .timer-container { width: 80%; height: 12px; background-color: #e0e0e0; border-radius: 10px; overflow: hidden; margin-top: 10px; }
         .timer-barra { width: 100%; height: 100%; background-color: #b29500; transition: width 8s linear; }
 
@@ -41,6 +44,7 @@
         .btn-controle:active { transform: scale(0.95); }
         .titulo-oculto { opacity: 0; height: 0; margin: 0; overflow: hidden; }
 
+        /* PAINEL ADMIN */
         #cadeado { position: fixed; top: 18px; right: 24px; background-color: rgba(0, 0, 0, 0.05); color: #666; padding: 12px 20px; border-radius: 20px; font-size: 15px; font-weight: bold; cursor: pointer; z-index: 100; }
         #modal-admin { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.72); z-index: 9999; justify-content: center; align-items: center; }
         .admin-content { background: white; padding: 25px; border-radius: 20px; width: min(760px, 92vw); text-align: left; max-height: 88vh; overflow-y: auto; box-sizing: border-box; }
@@ -65,9 +69,13 @@
             h1 { font-size: 22px; margin-bottom: 20px; margin-top: 40px; }
             .container-botoes { gap: 10px; }
             .acao { height: 100px; font-size: 14px; flex: 1 1 calc(50% - 10px); max-width: calc(50% - 10px); }
+            .icone-botao { width: 45px; height: 45px; }
             .acao span { font-size: 35px; margin-bottom: 5px; }
+            
             .acao.selecionado { height: 180px; font-size: 22px; }
+            .acao.selecionado .icone-botao { width: 80px; height: 80px; }
             .acao.selecionado span { font-size: 55px; margin-bottom: 10px; }
+            
             .area-interativa { flex-direction: column; align-items: center; }
             .area-interativa.modo-foco .container-botoes { width: 100%; max-width: 100%; margin-bottom: 20px; }
             .area-interativa.modo-foco .painel-feedback { width: 100%; margin-left: 0; padding: 20px; border-left: none; border-top: 8px solid #efef75; }
@@ -108,16 +116,28 @@
         
         <div class="area-interativa" id="area-interativa">
             <div class="container-botoes" id="grid-botoes">
-                <button class="acao" data-heat-key="amarela:apertar" onclick="selecionarAcao('apertar', this)"><span>🧽</span>Apertar algo</button>
-                <button class="acao" data-heat-key="amarela:brinquedo" onclick="selecionarAcao('brinquedo', this)"><span>🪀</span>Brinquedo</button>
-                <button class="acao" data-heat-key="amarela:pausa" onclick="selecionarAcao('pausa', this)"><span>⏸️</span>Pausa rápida</button>
-                <button class="acao" data-heat-key="amarela:agua" onclick="selecionarAcao('agua', this)"><span>💧</span>Beber água</button>
-                <button class="acao" data-heat-key="amarela:caminhar" onclick="selecionarAcao('caminhar', this)"><span>🚶</span>Caminhar</button>
-                <button class="acao" data-heat-key="amarela:contar" onclick="selecionarAcao('contar', this)"><span>🔢</span>Contar até 3</button>
+                <button class="acao" data-heat-key="amarela:apertar" onclick="selecionarAcao('apertar', this)">
+                    <img src="/imagens/zona_amarela/apertar.png" class="icone-botao" alt="Apertar algo">Apertar algo
+                </button>
+                <button class="acao" data-heat-key="amarela:brinquedo" onclick="selecionarAcao('brinquedo', this)">
+                    <img src="/imagens/zona_amarela/brinquedo.png" class="icone-botao" alt="Brinquedo">Brinquedo
+                </button>
+                <button class="acao" data-heat-key="amarela:pausa" onclick="selecionarAcao('pausa', this)">
+                    <img src="/imagens/zona_amarela/botão de pausa.png" class="icone-botao" alt="Pausa rápida">Pausa rápida
+                </button>
+                <button class="acao" data-heat-key="amarela:agua" onclick="selecionarAcao('agua', this)">
+                    <img src="/imagens/zona_amarela/beber.png" class="icone-botao" alt="Beber água">Beber água
+                </button>
+                <button class="acao" data-heat-key="amarela:caminhar" onclick="selecionarAcao('caminhar', this)">
+                    <img src="/imagens/zona_amarela/caminhar.png" class="icone-botao" alt="Caminhar">Caminhar
+                </button>
+                <button class="acao" data-heat-key="amarela:contar" onclick="selecionarAcao('contar', this)">
+                    <img src="/imagens/zona_amarela/contar.png" class="icone-botao" alt="Contar até 3">Contar até 3
+                </button>
             </div>
             
             <div class="painel-feedback" id="painel-mediador">
-                <img src="" id="gif-recompensa" class="gif-recompensa" alt="Animação Legal">
+                <img src="" id="gif-recompensa" class="gif-recompensa" alt="Imagem Recompensa">
                 <div class="texto-feedback" id="texto-feedback">Muito bem!</div>
                 <div class="timer-container">
                     <div class="timer-barra" id="timer-barra"></div>
@@ -137,42 +157,44 @@
         let timerReset;
         let audioAtual = null;
         
+        // Dicionário com Imagens Locais, Áudios e Tempo Personalizado
         const orientacoes = {
             "apertar": {
                 "label": "Apertar algo",
                 "textoVisual": "Pode apertar a massinha bem forte.",
                 "audio": "/audios/zona_amarela/Apertar.m4a",
-                "gif": "https://media.giphy.com/media/3o7WTF9ZcEAqR3yK7m/giphy.gif"
+                "imagem": "/imagens/zona_amarela/apertar.png"
             },
             "brinquedo": {
                 "label": "Brinquedo",
                 "textoVisual": "Pode pegar o seu brinquedo.",
                 "audio": "/audios/zona_amarela/Brinquedo.m4a",
-                "gif": "https://media.giphy.com/media/26AHONQ79FdWZhAI0/giphy.gif" 
+                "imagem": "/imagens/zona_amarela/brinquedo.png" 
             },
             "caminhar": {
                 "label": "Caminhar",
                 "textoVisual": "Vamos caminhar um pouco.",
                 "audio": "/audios/zona_amarela/Caminhar.m4a",
-                "gif": "https://media.giphy.com/media/21GCae4djDWtP5soiY/giphy.gif" 
+                "imagem": "/imagens/zona_amarela/caminhar.png" 
             },
             "pausa": {
                 "label": "Pausa rápida",
                 "textoVisual": "Pausa rápida. Pode sentar e respirar.",
                 "audio": "/audios/zona_amarela/Pausa.m4a",
-                "gif": "https://media.giphy.com/media/11ISwbgCxEzMyY/giphy.gif" 
+                "imagem": "/imagens/zona_amarela/botão de pausa.png" 
             },
             "agua": {
                 "label": "Beber água",
                 "textoVisual": "Vamos beber água.",
                 "audio": "/audios/zona_amarela/Agua.m4a",
-                "gif": "https://media.giphy.com/media/3o7TKrEzvLbgzGmidO/giphy.gif" 
+                "imagem": "/imagens/zona_amarela/beber.png" 
             },
             "contar": {
                 "label": "Contar até 3",
                 "textoVisual": "Conte devagarinho... Um, Dois, Três... Isso acalma a mente.",
                 "audio": "/audios/zona_amarela/Contar.m4a",
-                "gif": "https://media.giphy.com/media/l1J9urAfGd3grKV6E/giphy.gif"
+                "imagem": "/imagens/zona_amarela/contar.png",
+                "tempoEspera": 10000 // TEMPO AUMENTADO PARA 10 SEGUNDOS AQUI
             }
         };
         
@@ -231,7 +253,7 @@
                     label: dados.nome,
                     textoVisual: dados.textoVisual || "Isso vai ajudar você a se acalmar.",
                     audio: "/audios/zona_amarela/Customizado.m4a", 
-                    gif: "https://media.giphy.com/media/L0z2XEn1zI8Tq4D2x6/giphy.gif"
+                    imagem: "/imagens/zona_amarela/brinquedo.png" 
                 };
                 
                 const btn = criarBotaoAcao('custom', dados.emoji, dados.nome);
@@ -325,21 +347,24 @@
             });
             
             document.getElementById('texto-feedback').textContent = orientacao.textoVisual;
-            document.getElementById('gif-recompensa').src = orientacao.gif;
+            document.getElementById('gif-recompensa').src = orientacao.imagem;
             tocarAudio(orientacao.audio);
             
             const barra = document.getElementById('timer-barra');
             barra.style.transition = 'none';
             barra.style.width = '100%'; 
             
+            // VERIFICA SE TEM TEMPO ESPECÍFICO (COMO NO CONTAR), SE NÃO, USA 8000
+            const tempoDaAcao = orientacao.tempoEspera || 8000;
+            
             setTimeout(() => {
-                barra.style.transition = 'width 8s linear';
+                barra.style.transition = `width ${tempoDaAcao / 1000}s linear`; // A BARRA ESVAZIA NO TEMPO CORRETO
                 barra.style.width = '0%'; 
             }, 50);
             
             timerReset = setTimeout(() => {
                 window.location.href = 'principal.html';
-            }, 8000);
+            }, tempoDaAcao); // VOLTA PRA PIZZA NO TEMPO CORRETO
         }
 
         function acaoVoltar() {

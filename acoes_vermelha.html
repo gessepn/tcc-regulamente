@@ -17,19 +17,22 @@
         .container-botoes { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; width: 100%; max-width: 620px; transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
         
         .acao { --heat-opacity: 0.12; flex: 1 1 calc(50% - 15px); max-width: calc(50% - 15px); height: 132px; border-radius: 25px; color: #333; font-size: 18px; font-weight: bold; cursor: pointer; border: 4px solid white; background: linear-gradient(145deg, #ffc4c4, #ff9696); box-shadow: 0 4px 6px rgba(0,0,0,0.05), 0 0 0 12px rgba(255,255,255,var(--heat-opacity)); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); overflow: hidden; box-sizing: border-box; padding: 10px; }
-        .acao span { font-size: 45px; margin-bottom: 10px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
-        .acao:active { transform: scale(0.95); }
         
+        /* Estilos para as imagens (ARASAAC) e suporte a Emojis customizados */
+        .icone-botao { width: 65px; height: 65px; object-fit: contain; margin-bottom: 10px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .acao span { font-size: 45px; margin-bottom: 10px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        
+        .acao:active { transform: scale(0.95); }
         .acao.oculto { flex: 0 0 0%; max-width: 0; height: 0; padding: 0; margin: 0; border-width: 0; opacity: 0; transform: scale(0.8); pointer-events: none; }
+        
         .acao.selecionado { flex: 1 1 100%; max-width: 100%; height: 350px; transform: scale(1.02); pointer-events: none; box-shadow: 0 12px 26px rgba(0,0,0,0.16); font-size: 26px; }
+        .acao.selecionado .icone-botao { width: 130px; height: 130px; margin-bottom: 20px; }
         .acao.selecionado span { font-size: 85px; margin-bottom: 20px; }
         
-        /* PAINEL DE FEEDBACK LÚDICO */
         .painel-feedback { width: 0; opacity: 0; padding: 0; margin-left: 0; overflow: hidden; background: white; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; border-left: 0 solid #fff0f0; transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
-        .gif-recompensa { width: 200px; height: 200px; object-fit: cover; border-radius: 20px; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .gif-recompensa { width: 200px; height: 200px; object-fit: contain; border-radius: 20px; margin-bottom: 15px; }
         .texto-feedback { color: #d32f2f; font-size: 22px; font-weight: bold; margin: 0 10px 15px 10px; }
         
-        /* BARRA DE PROGRESSO DO TEMPO */
         .timer-container { width: 80%; height: 12px; background-color: #e0e0e0; border-radius: 10px; overflow: hidden; margin-top: 10px; }
         .timer-barra { width: 100%; height: 100%; background-color: #d32f2f; transition: width 8s linear; }
 
@@ -55,6 +58,7 @@
         .heatmap-label, .heatmap-value { font-size: 14px; color: #4a5568; }
         .heatmap-bar { grid-column: 1 / -1; width: 100%; height: 10px; background: #e6edf5; border-radius: 999px; overflow: hidden; }
         .heatmap-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, #ffc4c4, #ff9696); }
+        .heatmap-empty { margin: 0; color: #718096; }
         .btn-salvar, .btn-apagar, .btn-cancelar { border: none; padding: 10px; width: 100%; border-radius: 10px; font-weight: bold; margin-bottom: 10px; cursor: pointer; font-family: inherit; }
         .btn-salvar { background: #d32f2f; color: white; }
         .btn-apagar { background: #b71c1c; color: white; }
@@ -64,9 +68,13 @@
             h1 { font-size: 22px; margin-bottom: 20px; margin-top: 40px; }
             .container-botoes { gap: 10px; }
             .acao { height: 100px; font-size: 14px; flex: 1 1 calc(50% - 10px); max-width: calc(50% - 10px); }
+            .icone-botao { width: 45px; height: 45px; }
             .acao span { font-size: 35px; margin-bottom: 5px; }
+            
             .acao.selecionado { height: 180px; font-size: 22px; }
+            .acao.selecionado .icone-botao { width: 80px; height: 80px; }
             .acao.selecionado span { font-size: 55px; margin-bottom: 10px; }
+            
             .area-interativa { flex-direction: column; align-items: center; }
             .area-interativa.modo-foco .container-botoes { width: 100%; max-width: 100%; margin-bottom: 20px; }
             .area-interativa.modo-foco .painel-feedback { width: 100%; margin-left: 0; padding: 20px; border-left: none; border-top: 8px solid #ff9696; }
@@ -107,16 +115,28 @@
         
         <div class="area-interativa" id="area-interativa">
             <div class="container-botoes" id="grid-botoes">
-                <button class="acao" data-heat-key="vermelha:sair" onclick="selecionarAcao('sair', this)"><span>🚪</span>Sair de perto</button>
-                <button class="acao" data-heat-key="vermelha:sozinho" onclick="selecionarAcao('sozinho', this)"><span>🧘</span>Ficar sozinho</button>
-                <button class="acao" data-heat-key="vermelha:respirar" onclick="selecionarAcao('respirar', this)"><span>😮‍💨</span>Respirar fundo</button>
-                <button class="acao" data-heat-key="vermelha:parar" onclick="selecionarAcao('parar', this)"><span>⏸️</span>Parar tudo</button>
-                <button class="acao" data-heat-key="vermelha:silencio" onclick="selecionarAcao('silencio', this)"><span>🎧</span>Silêncio</button>
-                <button class="acao" data-heat-key="vermelha:contar" onclick="selecionarAcao('contar', this)"><span>🔢</span>Contar até 3</button>
+                <button class="acao" data-heat-key="vermelha:sair" onclick="selecionarAcao('sair', this)">
+                    <img src="/imagens/zona_vermelha/sair.png" class="icone-botao" alt="Sair de perto">Sair de perto
+                </button>
+                <button class="acao" data-heat-key="vermelha:sozinho" onclick="selecionarAcao('sozinho', this)">
+                    <img src="/imagens/zona_vermelha/sozinho.png" class="icone-botao" alt="Ficar sozinho">Ficar sozinho
+                </button>
+                <button class="acao" data-heat-key="vermelha:respirar" onclick="selecionarAcao('respirar', this)">
+                    <img src="/imagens/zona_vermelha/respirar.png" class="icone-botao" alt="Respirar fundo">Respirar fundo
+                </button>
+                <button class="acao" data-heat-key="vermelha:parar" onclick="selecionarAcao('parar', this)">
+                    <img src="/imagens/zona_vermelha/parar.png" class="icone-botao" alt="Parar tudo">Parar tudo
+                </button>
+                <button class="acao" data-heat-key="vermelha:silencio" onclick="selecionarAcao('silencio', this)">
+                    <img src="/imagens/zona_vermelha/silêncio.png" class="icone-botao" alt="Silêncio">Silêncio
+                </button>
+                <button class="acao" data-heat-key="vermelha:contar" onclick="selecionarAcao('contar', this)">
+                    <img src="/imagens/zona_vermelha/contar.png" class="icone-botao" alt="Contar até 3">Contar até 3
+                </button>
             </div>
             
             <div class="painel-feedback" id="painel-mediador">
-                <img src="" id="gif-recompensa" class="gif-recompensa" alt="Animação Legal">
+                <img src="" id="gif-recompensa" class="gif-recompensa" alt="Imagem Recompensa">
                 <div class="texto-feedback" id="texto-feedback">Tudo vai ficar bem!</div>
                 <div class="timer-container">
                     <div class="timer-barra" id="timer-barra"></div>
@@ -141,37 +161,38 @@
                 "label": "Sair de perto",
                 "textoVisual": "Tudo bem. Pode ir para um lugar mais calmo.",
                 "audio": "/audios/zona_vermelha/Sair.m4a",
-                "gif": "https://media.giphy.com/media/3o7ZetIsjtbkgNE1I4/giphy.gif"
+                "gif": "/imagens/zona_vermelha/sair.png"
             },
             "respirar": {
                 "label": "Respirar fundo",
                 "textoVisual": "Puxe o ar pelo nariz... e solte pela boca. Muito bem.",
                 "audio": "/audios/zona_vermelha/Respirar.m4a",
-                "gif": "https://media.giphy.com/media/l1J9urAfGd3grKV6E/giphy.gif"
+                "gif": "/imagens/zona_vermelha/respirar.png"
             },
             "contar": {
                 "label": "Contar até 3",
                 "textoVisual": "Vamos contar juntos? Um... Dois... Três... Você está seguro.",
                 "audio": "/audios/zona_vermelha/Contar.m4a",
-                "gif": "https://media.giphy.com/media/26AHONQ79FdWZhAI0/giphy.gif"
+                "gif": "/imagens/zona_vermelha/contar.png",
+                "tempoEspera": 10000 // TEMPO AUMENTADO PARA 10 SEGUNDOS AQUI
             },
             "silencio": {
                 "label": "Silêncio",
                 "textoVisual": "Eu entendo. Coloque o fone e descanse os ouvidos.",
                 "audio": "/audios/zona_vermelha/Silencio.m4a",
-                "gif": "https://media.giphy.com/media/l41YkxvU8c7J7Bba0/giphy.gif"
+                "gif": "/imagens/zona_vermelha/silêncio.png"
             },
             "sozinho": {
                 "label": "Ficar sozinho",
                 "textoVisual": "Vá para o seu cantinho. Ninguém vai te incomodar agora.",
                 "audio": "/audios/zona_vermelha/Sozinho.m4a",
-                "gif": "https://media.giphy.com/media/5z0cCCGooBQUtegM4t/giphy.gif"
+                "gif": "/imagens/zona_vermelha/sozinho.png"
             },
             "parar": {
                 "label": "Parar tudo",
                 "textoVisual": "Pare o que estiver fazendo. Descanse um pouco.",
                 "audio": "/audios/zona_vermelha/Parar.m4a",
-                "gif": "https://media.giphy.com/media/11ISwbgCxEzMyY/giphy.gif"
+                "gif": "/imagens/zona_vermelha/parar.png"
             }
         };
         
@@ -230,7 +251,7 @@
                     label: dados.nome,
                     textoVisual: dados.textoVisual || "Tudo vai ficar bem.",
                     audio: "/audios/zona_vermelha/Customizado.m4a", 
-                    gif: "https://media.giphy.com/media/Vz58J8shFW6BvqnYTm/giphy.gif"
+                    gif: "/imagens/zona_vermelha/parar.png" // Fallback para botão customizado
                 };
                 
                 const btn = criarBotaoAcao('custom', dados.emoji, dados.nome);
@@ -323,7 +344,6 @@
                 }
             });
             
-            // INSERE O GIF E O TEXTO NA TELA E TOCA O ÁUDIO
             document.getElementById('texto-feedback').textContent = orientacao.textoVisual;
             document.getElementById('gif-recompensa').src = orientacao.gif;
             tocarAudio(orientacao.audio);
@@ -332,14 +352,17 @@
             barra.style.transition = 'none';
             barra.style.width = '100%'; 
             
+            // VERIFICA SE TEM TEMPO ESPECÍFICO (COMO NO CONTAR), SE NÃO, USA 8000
+            const tempoDaAcao = orientacao.tempoEspera || 8000;
+            
             setTimeout(() => {
-                barra.style.transition = 'width 8s linear';
+                barra.style.transition = `width ${tempoDaAcao / 1000}s linear`; // A BARRA ESVAZIA NO TEMPO CORRETO
                 barra.style.width = '0%'; 
             }, 50);
             
             timerReset = setTimeout(() => {
                 window.location.href = 'principal.html';
-            }, 8000);
+            }, tempoDaAcao); // VOLTA PRA PIZZA NO TEMPO CORRETO
         }
 
         function acaoVoltar() {
