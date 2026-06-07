@@ -1,4 +1,4 @@
-// banco de dados salvo no navegador
+
 const chaveBD = "regula_dados_tcc";
 
 function pegarDados() {
@@ -7,7 +7,7 @@ function pegarDados() {
         return JSON.parse(salva);
     }
     
-    // se nao tiver nada salva, cria a estrutura inicial
+    
     let objBase = {
         zonas: {
             "Verde": 0,
@@ -33,9 +33,7 @@ function getAlunoLogado() {
     return user;
 }
 
-// ========== FUNÇÕES DE SEGURANÇA E INSTALAÇÃO ==========
 
-// Sistema de PIN para o Mediador
 const RegulaMenteApp = {
     promptForMediatorPin() {
         const pin = prompt("Digite o PIN de acesso do mediador:");
@@ -44,7 +42,7 @@ const RegulaMenteApp = {
 };
 window.RegulaMenteApp = RegulaMenteApp;
 
-// Registro do Service Worker para permitir "Instalar" no Tablet
+
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('sw.js')
@@ -53,19 +51,17 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-// ========== FUNCOES PRINCIPAIS DE REGISTRO ==========
 
-// chama quando a crianca clica num botao de cor (Pizza)
 function registrarAcessoZona(corClicada) {
     let bd = pegarDados();
     let nomeAluno = getAlunoLogado();
 
-    // aumenta contagem global
+    
     if (bd.zonas[corClicada] !== undefined) {
         bd.zonas[corClicada] = bd.zonas[corClicada] + 1;
     }
 
-    // historico individual
+    
     if (!bd.alunos[nomeAluno]) {
         bd.alunos[nomeAluno] = {
             cliquesTotais: 0,
@@ -83,7 +79,7 @@ function registrarAcessoZona(corClicada) {
     salvarDados(bd);
 }
 
-// chama quando a crianca escolhe uma acao tipo beber agua
+
 function registrarUsoEstrategia(nomeAcao) {
     let bd = pegarDados();
     
@@ -95,7 +91,7 @@ function registrarUsoEstrategia(nomeAcao) {
     salvarDados(bd);
 }
 
-// botao de reset
+
 function apagarHeatmap() {
     if(confirm("Tem certeza que deseja zerar todos os dados do TCC?")) {
         localStorage.removeItem(chaveBD);
@@ -103,7 +99,7 @@ function apagarHeatmap() {
     }
 }
 
-// ========== MONTAGEM DOS GRÁFICOS (ÁREA OCULTA) ==========
+
 
 function desenharGraficosTCC() {
     let bd = pegarDados();
@@ -140,7 +136,7 @@ function desenharGraficosTCC() {
         divGraficoZonas.innerHTML = htmlFinalZonas;
     }
 
-    // 2. grafico de acoes
+    
     let divGraficoAcoes = document.getElementById("grafico-estrategias");
     if (divGraficoAcoes) {
         let acoesArray = [];
@@ -169,7 +165,7 @@ function desenharGraficosTCC() {
         }
     }
 
-    // 3. tabela da turma
+    
     let tabela = document.getElementById("tabela-alunos");
     if (tabela) {
         let nomesAlunos = Object.keys(bd.alunos);

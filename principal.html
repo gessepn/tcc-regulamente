@@ -2,7 +2,7 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cores do Sentir - Principal</title>
     <link rel="manifest" href="manifest.json">
     <style>
@@ -184,7 +184,7 @@
     </div>
 
     <div id="tela-intro">
-      <h1 id="texto-intro">Respire fundo...</h1>
+      <h1 id="texto-intro">COMO VOCÊ ESTÁ SE SENTINDO HOJE?</h1>
       <div class="circulos-intro">
         <div class="circulo azul"></div>
         <div class="circulo verde"></div>
@@ -201,37 +201,41 @@
       </div>
 
       <div class="app-container">
-        <h1 id="titulo-principal">Como você está se sentindo hoje?</h1>
+        <h1 id="titulo-principal">COMO VOCÊ ESTÁ SE SENTINDO HOJE?</h1>
 
         <div class="pizza-container">
           <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
             
             <g class="fatia azul" data-zona="Azul">
               <path d="M 500 500 L 0 500 A 500 500 0 0 1 146.45 146.45 Z" fill="#a8d1e1" stroke="#fefeff" stroke-width="12" />
-              <image href="imagens/pizza/cansada.png" x="120" y="220" width="120" height="120" />
+              <image href="imagens/pizza/cansada.png" x="120" y="235" width="120" height="120" />
               <text x="180" y="380" text-anchor="middle" font-size="24" font-weight="bold" fill="#333">ZONA AZUL</text>
-              <text x="180" y="415" text-anchor="middle" font-size="18" fill="#555">Triste / Cansada</text>
+              <text x="180" y="415" text-anchor="middle" font-size="18" fill="#555">CANSADA</text>
+              <text x="180" y="440" text-anchor="middle" font-size="18" fill="#555">BAIXA ENERGIA</text>
             </g>
 
             <g class="fatia verde" data-zona="Verde">
               <path d="M 500 500 L 146.45 146.45 A 500 500 0 0 1 500 0 Z" fill="#a8d1a8" stroke="#fefeff" stroke-width="12" />
-              <image href="imagens/pizza/alegre.png" x="300" y="50" width="120" height="120" />
-              <text x="360" y="210" text-anchor="middle" font-size="24" font-weight="bold" fill="#333">ZONA VERDE</text>
-              <text x="360" y="245" text-anchor="middle" font-size="18" fill="#555">Feliz / Calma</text>
+              <image href="imagens/pizza/alegre.png" x="305" y="65" width="120" height="120" />
+              <text x="370" y="210" text-anchor="middle" font-size="24" font-weight="bold" fill="#333">ZONA VERDE</text>
+              <text x="370" y="245" text-anchor="middle" font-size="18" fill="#555">FELIZ</text>
+              <text x="370" y="270" text-anchor="middle" font-size="18" fill="#555">ESTOU BEM</text>
             </g>
 
             <g class="fatia amarela" data-zona="Amarela">
               <path d="M 500 500 L 500 0 A 500 500 0 0 1 853.55 146.45 Z" fill="#fdfd96" stroke="#fefeff" stroke-width="12" />
-              <image href="imagens/pizza/preocupado.png" x="570" y="42" width="140" height="140" />
-              <text x="640" y="210" text-anchor="middle" font-size="24" font-weight="bold" fill="#333">ZONA AMARELA</text>
-              <text x="640" y="245" text-anchor="middle" font-size="18" fill="#555">Agitada / Preocupada</text>
+              <image href="imagens/pizza/ansioso.png" x="550" y="58" width="140" height="130" />
+              <text x="620" y="210" text-anchor="middle" font-size="24" font-weight="bold" fill="#333">ZONA AMARELA</text>
+              <text x="615" y="240" text-anchor="middle" font-size="18" fill="#555">ANSIOSO</text>
+              <text x="615" y="265" text-anchor="middle" font-size="18" fill="#555">PRECISO DE ATENÇÃO</text>
             </g>
 
             <g class="fatia vermelha" data-zona="Vermelha">
               <path d="M 500 500 L 853.55 146.45 A 500 500 0 0 1 1000 500 Z" fill="#ff9696" stroke="#fefeff" stroke-width="12" />
-              <image href="imagens/pizza/irritação.png" x="760" y="220" width="120" height="120" />
+              <image href="imagens/pizza/irritação.png" x="760" y="234" width="120" height="120" />
               <text x="820" y="380" text-anchor="middle" font-size="24" font-weight="bold" fill="#333">ZONA VERMELHA</text>
-              <text x="820" y="415" text-anchor="middle" font-size="18" fill="#555">Brava / Assustada</text>
+              <text x="820" y="415" text-anchor="middle" font-size="18" fill="#555">BRAVO</text>
+              <text x="820" y="440" text-anchor="middle" font-size="18" fill="#555">PRECISO DE AJUDA</text>
             </g>
 
             <path d="M 380 500 A 120 120 0 0 1 620 500 Z" fill="#fefeff" />
@@ -262,7 +266,7 @@
         introTimer1 = setTimeout(() => {
           texto.style.opacity = 0;
           setTimeout(() => {
-            texto.innerText = "Vamos ver como você está se sentindo?";
+            texto.innerText = "ESCOLHA A COR QUE MAIS COMBINA COM VOCÊ.";
             texto.style.opacity = 1;
           }, 500);
         }, 3000);

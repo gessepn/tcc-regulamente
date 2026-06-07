@@ -46,33 +46,33 @@
     <div id="cadeado" onclick="acaoVoltar()">⬅ Voltar 🔒</div>
     
     <div class="app-container">
-        <h1 id="titulo-principal">Você está na Zona Amarela 😟<br>O que ajuda a acalmar?</h1>
+        <h1 id="titulo-principal">VOCÊ ESTÁ NA ZONA AMARELA<br>PREOCUPADO, ANSIOSO OU FRUSTRADO?<br>O QUE AJUDA A ACALMAR?</h1>
         
         <div class="area-interativa" id="area-interativa">
             <div class="container-botoes" id="grid-botoes">
                 <button class="acao" onclick="selecionarAcao('apertar', this)">
-                    <img src="imagens/zona_amarela/apertar.png" class="icone-botao" alt="Apertar">Apertar algo
+                    <img src="imagens/zona_amarela/apertar.png" class="icone-botao" alt="Apertar">APERTAR ALGO
                 </button>
                 <button class="acao" onclick="selecionarAcao('brinquedo', this)">
-                    <img src="imagens/zona_amarela/brinquedo.png" class="icone-botao" alt="Brinquedo">Brinquedo
+                    <img src="imagens/zona_amarela/brinquedo.png" class="icone-botao" alt="Brinquedo">BRINQUEDO
                 </button>
                 <button class="acao" onclick="selecionarAcao('pausa', this)">
-                    <img src="imagens/zona_amarela/botão de pausa.png" class="icone-botao" alt="Pausa">Pausa rápida
+                    <img src="imagens/zona_amarela/botao_de_pausa.png" class="icone-botao" alt="Pausa">PAUSA RÁPIDA
                 </button>
                 <button class="acao" onclick="selecionarAcao('agua', this)">
-                    <img src="imagens/zona_amarela/beber.png" class="icone-botao" alt="Água">Beber água
+                    <img src="imagens/zona_amarela/beber.png" class="icone-botao" alt="Água">BEBER ÁGUA
                 </button>
                 <button class="acao" onclick="selecionarAcao('caminhar', this)">
-                    <img src="imagens/zona_amarela/caminhar.png" class="icone-botao" alt="Caminhar">Caminhar
+                    <img src="imagens/zona_amarela/caminhar.png" class="icone-botao" alt="Caminhar">CAMINHAR
                 </button>
                 <button class="acao" onclick="selecionarAcao('contar', this)">
-                    <img src="imagens/zona_amarela/contar.png" class="icone-botao" alt="Contar">Contar até 3
+                    <img src="imagens/zona_amarela/contar.png" class="icone-botao" alt="Contar">CONTAR ATÉ 3
                 </button>
             </div>
             
             <div class="painel-feedback" id="painel-mediador">
                 <img src="" id="gif-recompensa" class="gif-recompensa" alt="Ação">
-                <div class="texto-feedback" id="texto-feedback">Muito bem!</div>
+                <div class="texto-feedback" id="texto-feedback">MUITO BEM!</div>
                 <div class="timer-container">
                     <div class="timer-barra" id="timer-barra"></div>
                 </div>
@@ -93,38 +93,38 @@
         const orientacoes = {
             "apertar": {
                 "label": "Apertar algo",
-                "textoVisual": "Pode apertar a massinha bem forte.",
-                "audio": "audios/zona_amarela/Apertar.m4a",
+                "textoVisual": "PODE APERTAR A MASSINHA BEM FORTE.",
+                "audio": "audios/zona_amarela/apertar.m4a",
                 "imagem": "imagens/zona_amarela/apertar.png"
             },
             "brinquedo": {
                 "label": "Brinquedo",
-                "textoVisual": "Pode pegar o seu brinquedo.",
-                "audio": "audios/zona_amarela/Brinquedo.m4a",
+                "textoVisual": "PODE PEGAR O SEU BRINQUEDO.",
+                "audio": "audios/zona_amarela/brinquedo.m4a",
                 "imagem": "imagens/zona_amarela/brinquedo.png" 
             },
             "caminhar": {
                 "label": "Caminhar",
-                "textoVisual": "Vamos caminhar um pouco.",
-                "audio": "audios/zona_amarela/Caminhar.m4a",
+                "textoVisual": "VAMOS CAMINHAR UM POUCO.",
+                "audio": "audios/zona_amarela/caminhar.m4a",
                 "imagem": "imagens/zona_amarela/caminhar.png" 
             },
             "pausa": {
                 "label": "Pausa rápida",
-                "textoVisual": "Pausa rápida. Pode sentar e respirar.",
-                "audio": "audios/zona_amarela/Pausa.m4a",
-                "imagem": "imagens/zona_amarela/botão de pausa.png" 
+                "textoVisual": "PAUSA RÁPIDA. PODE SENTAR E RESPIRAR.",
+                "audio": "audios/zona_amarela/pausa.m4a",
+                "imagem": "imagens/zona_amarela/botao_de_pausa.png" 
             },
             "agua": {
                 "label": "Beber água",
-                "textoVisual": "Vamos beber água.",
-                "audio": "audios/zona_amarela/Agua.m4a",
+                "textoVisual": "VAMOS BEBER ÁGUA.",
+                "audio": "audios/zona_amarela/agua.m4a",
                 "imagem": "imagens/zona_amarela/beber.png" 
             },
             "contar": {
                 "label": "Contar até 3",
-                "textoVisual": "Conte devagarinho... Um, Dois, Três...",
-                "audio": "audios/zona_amarela/Contar.m4a",
+                "textoVisual": "CONTE DEVAGARINHO... UM, DOIS, TRÊS...",
+                "audio": "audios/zona_amarela/contar.m4a",
                 "imagem": "imagens/zona_amarela/contar.png",
                 "tempoEspera": 10000 
             }
@@ -143,7 +143,7 @@
             const orientacao = orientacoes[chave];
             if (!orientacao) return;
             
-            // REGISTRAR NO BANCO DE DADOS DO TCC (app.js)
+            
             if (typeof registrarUsoEstrategia === 'function') {
                 registrarUsoEstrategia(orientacao.label);
             }

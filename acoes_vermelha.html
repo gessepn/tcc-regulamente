@@ -46,33 +46,33 @@
     <div id="cadeado" onclick="acaoVoltar()">⬅ Voltar 🔒</div>
     
     <div class="app-container">
-        <h1 id="titulo-principal">Você está na Zona Vermelha 😡<br>O que você precisa agora?</h1>
+        <h1 id="titulo-principal">VOCÊ ESTÁ NA ZONA VERMELHA<br>BRAVO, COM MEDO OU MUITO NERVOSO?<br>O QUE VOCÊ PRECISA AGORA?</h1>
         
         <div class="area-interativa" id="area-interativa">
             <div class="container-botoes" id="grid-botoes">
                 <button class="acao" onclick="selecionarAcao('sair', this)">
-                    <img src="imagens/zona_vermelha/sair.png" class="icone-botao" alt="Sair">Sair de perto
+                    <img src="imagens/zona_vermelha/sair.png" class="icone-botao" alt="Sair">SAIR DE PERTO
                 </button>
                 <button class="acao" onclick="selecionarAcao('sozinho', this)">
-                    <img src="imagens/zona_vermelha/sozinho.png" class="icone-botao" alt="Sozinho">Ficar sozinho
+                    <img src="imagens/zona_vermelha/sozinho.png" class="icone-botao" alt="Sozinho">FICAR SOZINHO
                 </button>
                 <button class="acao" onclick="selecionarAcao('respirar', this)">
-                    <img src="imagens/zona_vermelha/respirar.png" class="icone-botao" alt="Respirar">Respirar fundo
+                    <img src="imagens/zona_vermelha/respirar.png" class="icone-botao" alt="Respirar">RESPIRAR FUNDO
                 </button>
                 <button class="acao" onclick="selecionarAcao('parar', this)">
-                    <img src="imagens/zona_vermelha/parar.png" class="icone-botao" alt="Parar">Parar tudo
+                    <img src="imagens/zona_vermelha/parar.png" class="icone-botao" alt="Parar">PARAR TUDO
                 </button>
                 <button class="acao" onclick="selecionarAcao('silencio', this)">
-                    <img src="imagens/zona_vermelha/silêncio.png" class="icone-botao" alt="Silêncio">Silêncio
+                    <img src="imagens/zona_vermelha/silencio.png" class="icone-botao" alt="Silêncio">SILÊNCIO
                 </button>
                 <button class="acao" onclick="selecionarAcao('contar', this)">
-                    <img src="imagens/zona_vermelha/contar.png" class="icone-botao" alt="Contar">Contar até 3
+                    <img src="imagens/zona_vermelha/contar.png" class="icone-botao" alt="Contar">CONTAR ATÉ 3
                 </button>
             </div>
             
             <div class="painel-feedback" id="painel-mediador">
                 <img src="" id="gif-recompensa" class="gif-recompensa" alt="Ação">
-                <div class="texto-feedback" id="texto-feedback">Tudo vai ficar bem!</div>
+                <div class="texto-feedback" id="texto-feedback">TUDO VAI FICAR BEM!</div>
                 <div class="timer-container">
                     <div class="timer-barra" id="timer-barra"></div>
                 </div>
@@ -80,7 +80,7 @@
         </div>
         
         <div class="controles">
-            <button class="btn-controle" id="btn-voltar-manual" onclick="acaoVoltar()" style="opacity: 0.6;">⬅ Início</button>
+            <button class="btn-controle" id="btn-voltar-manual" onclick="acaoVoltar()" style="opacity: 0.6;">⬅ INÍCIO</button>
         </div>
     </div>
 
@@ -93,39 +93,39 @@
         const orientacoes = {
             "sair": {
                 "label": "Sair de perto",
-                "textoVisual": "Tudo bem. Pode ir para um lugar mais calmo.",
-                "audio": "audios/zona_vermelha/Sair.m4a",
+                "textoVisual": "TUDO BEM. PODE IR PARA UM LUGAR MAIS CALMO.",
+                "audio": "audios/zona_vermelha/sair.m4a",
                 "gif": "imagens/zona_vermelha/sair.png"
             },
             "respirar": {
                 "label": "Respirar fundo",
-                "textoVisual": "Puxe o ar pelo nariz... e solte pela boca.",
-                "audio": "audios/zona_vermelha/Respirar.m4a",
+                "textoVisual": "PUXE O AR PELO NARIZ... E SOLTE PELA BOCA.",
+                "audio": "audios/zona_vermelha/respirar.m4a",
                 "gif": "imagens/zona_vermelha/respirar.png"
             },
             "contar": {
                 "label": "Contar até 3",
-                "textoVisual": "Vamos contar juntos? Um... Dois... Três...",
-                "audio": "audios/zona_vermelha/Contar.m4a",
+                "textoVisual": "VAMOS CONTAR JUNTOS? UM... DOIS... TRÊS...",
+                "audio": "audios/zona_vermelha/contar.m4a",
                 "gif": "imagens/zona_vermelha/contar.png",
                 "tempoEspera": 10000 
             },
             "silencio": {
                 "label": "Silêncio",
-                "textoVisual": "Eu entendo. Vamos descansar os ouvidos.",
-                "audio": "audios/zona_vermelha/Silencio.m4a",
-                "gif": "imagens/zona_vermelha/silêncio.png"
+                "textoVisual": "EU ENTENDO. VAMOS DESCANSAR OS OUVIDOS.",
+                "audio": "audios/zona_vermelha/silencio.m4a",
+                "gif": "imagens/zona_vermelha/silencio.png"
             },
             "sozinho": {
                 "label": "Ficar sozinho",
-                "textoVisual": "Vá para o seu cantinho. Você está seguro.",
-                "audio": "audios/zona_vermelha/Sozinho.m4a",
+                "textoVisual": "VÁ PARA O SEU CANTINHO. VOCÊ ESTÁ SEGURO.",
+                "audio": "audios/zona_vermelha/sozinho.m4a",
                 "gif": "imagens/zona_vermelha/sozinho.png"
             },
             "parar": {
                 "label": "Parar tudo",
-                "textoVisual": "Pare o que estiver fazendo. Relaxe um pouco.",
-                "audio": "audios/zona_vermelha/Parar.m4a",
+                "textoVisual": "PARE O QUE ESTIVER FAZENDO. RELAXE UM POUCO.",
+                "audio": "audios/zona_vermelha/parar.m4a",
                 "gif": "imagens/zona_vermelha/parar.png"
             }
         };
@@ -143,7 +143,7 @@
             const orientacao = orientacoes[chave];
             if (!orientacao) return;
             
-            // REGISTRAR NO BANCO DE DADOS DO TCC (app.js)
+            
             if (typeof registrarUsoEstrategia === 'function') {
                 registrarUsoEstrategia(orientacao.label);
             }

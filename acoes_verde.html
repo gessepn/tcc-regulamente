@@ -46,29 +46,29 @@
     <div id="cadeado" onclick="acaoVoltar()">⬅ Voltar 🔒</div>
     
     <div class="app-container">
-        <h1 id="titulo-principal">Você está na Zona Verde 😊<br>O que você quer fazer?</h1>
+        <h1 id="titulo-principal">VOCÊ ESTÁ NA ZONA VERDE<br>CALMO, FELIZ OU CONCENTRADO?<br>O QUE VOCÊ QUER FAZER?</h1>
         
         <div class="area-interativa" id="area-interativa">
             <div class="container-botoes" id="grid-botoes">
                 <button class="acao" onclick="selecionarAcao('ler', this)">
-                    <img src="imagens/zona_verde/ler.png" class="icone-botao" alt="Ler">Ler um livro
+                    <img src="imagens/zona_verde/ler.png" class="icone-botao" alt="Ler">LER UM LIVRO
                 </button>
                 <button class="acao" onclick="selecionarAcao('tarefa', this)">
-                    <img src="imagens/zona_verde/atividade.png" class="icone-botao" alt="Tarefa">Fazer a tarefa
+                    <img src="imagens/zona_verde/atividade.png" class="icone-botao" alt="Tarefa">FAZER A TAREFA
                 </button>
                 <button class="acao" onclick="selecionarAcao('ajudar', this)">
-                    <img src="imagens/zona_verde/professor.png" class="icone-botao" alt="Ajudar">Ajudar o professor
+                    <img src="imagens/zona_verde/professor.png" class="icone-botao" alt="Ajudar">AJUDAR O PROFESSOR
                 </button>
                 <button class="acao" onclick="selecionarAcao('comer', this)">
-                    <img src="imagens/zona_verde/comer.png" class="icone-botao" alt="Comer">Comer algo
+                    <img src="imagens/zona_verde/comer.png" class="icone-botao" alt="Comer">COMER ALGO
                 </button>
                 <button class="acao" onclick="selecionarAcao('brincar', this)">
-                    <img src="imagens/zona_verde/brincar.png" class="icone-botao" alt="Brincar">Brincar com amigo
+                    <img src="imagens/zona_verde/brincar.png" class="icone-botao" alt="Brincar">BRINCAR COM AMIGO
                 </button>
                 <button class="acao" onclick="selecionarAcao('tablet', this)">
-                    <img src="imagens/zona_verde/jogar no tablet.png" class="icone-botao" alt="Tablet">Jogar no tablet
+                    <img src="imagens/zona_verde/jogar_no_tablet.png" class="icone-botao" alt="Tablet">JOGAR NO TABLET
                 </button>
-            </div>
+            </div> 
             
             <div class="painel-feedback" id="painel-mediador">
                 <img src="" id="gif-recompensa" class="gif-recompensa" alt="Imagem">
@@ -93,38 +93,38 @@
         const orientacoes = {
             "tarefa": {
                 "label": "Fazer a tarefa",
-                "textoVisual": "Muito bem! Vamos fazer a tarefa com capricho!",
-                "audio": "audios/zona_verde/Tarefa.m4a",
+                "textoVisual": "MUITO BEM! VAMOS FAZER A TAREFA COM CAPRICO!",
+                "audio": "audios/zona_verde/tarefa.m4a",
                 "imagem": "imagens/zona_verde/atividade.png"
             },
             "comer": {
                 "label": "Comer algo",
-                "textoVisual": "Que delícia! Hora de um lanchinho!",
-                "audio": "audios/zona_verde/Comer_algo.m4a",
+                "textoVisual": "QUE DELÍCIA! HORA DE UM LANCHINHO!",
+                "audio": "audios/zona_verde/comer_algo.m4a",
                 "imagem": "imagens/zona_verde/comer.png" 
             },
             "ajudar": {
                 "label": "Ajudar o professor",
-                "textoVisual": "Você é um ótimo ajudante!",
-                "audio": "audios/zona_verde/Ajudar_professor.m4a",
+                "textoVisual": "VOCÊ É UM ÓTIMO AJUDANTE!",
+                "audio": "audios/zona_verde/ajudar_professor.m4a",
                 "imagem": "imagens/zona_verde/professor.png" 
             },
             "tablet": {
                 "label": "Jogar no tablet",
-                "textoVisual": "Hora da diversão! Vamos jogar um pouco.",
-                "audio": "audios/zona_verde/Jogar_tablet.m4a",
-                "imagem": "imagens/zona_verde/jogar no tablet.png" 
+                "textoVisual": "HORA DA DIVERSÃO! VAMOS JOGAR UM POUCO.",
+                "audio": "audios/zona_verde/jogar_tablet.m4a",
+                "imagem": "imagens/zona_verde/jogar_no_tablet.png" 
             },
             "brincar": {
                 "label": "Brincar com amigo",
-                "textoVisual": "Que legal! Vamos brincar juntos!",
-                "audio": "audios/zona_verde/Brincar.m4a",
+                "textoVisual": "QUE LEGAL! VAMOS BRINCAR JUNTOS!",
+                "audio": "audios/zona_verde/brincar.m4a",
                 "imagem": "imagens/zona_verde/brincar.png" 
             },
             "ler": {
                 "label": "Ler um livro",
-                "textoVisual": "Excelente escolha! Boa leitura.",
-                "audio": "audios/zona_verde/Ler_livro.m4a",
+                "textoVisual": "EXCELENTE ESCOLHA! BOA LEITURA.",
+                "audio": "audios/zona_verde/ler_livro.m4a",
                 "imagem": "imagens/zona_verde/ler.png" 
             }
         };
@@ -142,12 +142,12 @@
             const orientacao = orientacoes[chave];
             if (!orientacao) return;
             
-            // 1. REGISTRAR NO HEATMAP DO TCC (app.js)
+            
             if (typeof registrarUsoEstrategia === 'function') {
                 registrarUsoEstrategia(orientacao.label);
             }
             
-            // 2. EFEITOS VISUAIS
+            
             document.getElementById('titulo-principal').classList.add('titulo-oculto');
             document.getElementById('area-interativa').classList.add('modo-foco');
             
@@ -163,19 +163,19 @@
             document.getElementById('gif-recompensa').src = orientacao.imagem;
             tocarAudio(orientacao.audio);
             
-            // 3. TIMER PARA VOLTAR (4 segundos)
+            
             const barra = document.getElementById('timer-barra');
             barra.style.transition = 'none';
             barra.style.width = '100%'; 
             
             setTimeout(() => {
-                barra.style.transition = 'width 4s linear'; 
+                barra.style.transition = 'width 4.58s linear'; 
                 barra.style.width = '0%'; 
             }, 50);
             
             timerReset = setTimeout(() => {
                 window.location.assign('principal.html');
-            }, 4000); 
+            }, 4580); 
         }
 
         function acaoVoltar() {

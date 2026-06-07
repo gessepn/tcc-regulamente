@@ -46,27 +46,27 @@
     <div id="cadeado" onclick="acaoVoltar()">⬅ Voltar 🔒</div>
     
     <div class="app-container">
-        <h1 id="titulo-principal">Você está na Zona Azul 😥<br>O que pode ajudar?</h1>
+        <h1 id="titulo-principal">VOCÊ ESTÁ NA ZONA AZUL<br>TRISTE, CANSADO OU SONOLENTO?<br>O QUE PODE AJUDAR?</h1>
         
         <div class="area-interativa" id="area-interativa">
             <div class="container-botoes" id="grid-botoes">
                 <button class="acao" onclick="selecionarAcao('descansar', this)">
-                    <img src="imagens/zona_azul/descansar.png" class="icone-botao" alt="Descansar">Descansar
+                    <img src="imagens/zona_azul/descansar.png" class="icone-botao" alt="Descansar">DESCANSAR
                 </button>
                 <button class="acao" onclick="selecionarAcao('musica', this)">
-                    <img src="imagens/zona_azul/ouvir música.png" class="icone-botao" alt="Música">Ouvir música
+                    <img src="imagens/zona_azul/ouvir_musica.png" class="icone-botao" alt="Música">OUVIR MÚSICA
                 </button>
                 <button class="acao" onclick="selecionarAcao('caminhar', this)">
-                    <img src="imagens/zona_azul/caminhar.png" class="icone-botao" alt="Caminhar">Caminhar
+                    <img src="imagens/zona_azul/caminhar.png" class="icone-botao" alt="Caminhar">CAMINHAR
                 </button>
                 <button class="acao" onclick="selecionarAcao('desenhar', this)">
-                    <img src="imagens/zona_azul/desenhar.png" class="icone-botao" alt="Desenhar">Desenhar
+                    <img src="imagens/zona_azul/desenhar.png" class="icone-botao" alt="Desenhar">DESENHAR
                 </button>
                 <button class="acao" onclick="selecionarAcao('ajuda', this)">
-                    <img src="imagens/zona_azul/ajuda.png" class="icone-botao" alt="Ajuda">Pedir ajuda
+                    <img src="imagens/zona_azul/ajuda.png" class="icone-botao" alt="Ajuda">PEDIR AJUDA
                 </button>
                 <button class="acao" onclick="selecionarAcao('agua', this)">
-                    <img src="imagens/zona_azul/beber.png" class="icone-botao" alt="Água">Beber água
+                    <img src="imagens/zona_azul/beber.png" class="icone-botao" alt="Água">BEBER ÁGUA
                 </button>
             </div>
             
@@ -93,38 +93,38 @@
         const orientacoes = {
             "descansar": {
                 "label": "Descansar",
-                "textoVisual": "Você pode descansar um pouquinho. Relaxe.",
-                "audio": "audios/zona_azul/Descansar.m4a",
+                "textoVisual": "VOCÊ PODE DESCANSAR UM POUQUINHO. RELAXE.",
+                "audio": "audios/zona_azul/descansar.m4a",
                 "gif": "imagens/zona_azul/descansar.png"
             },
             "musica": {
                 "label": "Ouvir música",
-                "textoVisual": "Ouça uma música bem calma.",
-                "audio": "audios/zona_azul/Musica.m4a",
-                "gif": "imagens/zona_azul/ouvir música.png" 
+                "textoVisual": "OUÇA UMA MÚSICA BEM CALMA.",
+                "audio": "audios/zona_azul/musica.m4a",
+                "gif": "imagens/zona_azul/ouvir_musica.png" 
             },
             "caminhar": {
                 "label": "Caminhar",
-                "textoVisual": "Vamos dar uma volta? Isso ajuda a organizar o corpo.",
-                "audio": "audios/zona_azul/Caminhar.m4a",
+                "textoVisual": "VAMOS DAR UMA VOLTA? ISSO AJUDA A ORGANIZAR O CORPO.",
+                "audio": "audios/zona_azul/caminhar.m4a",
                 "gif": "imagens/zona_azul/caminhar.png" 
             },
             "desenhar": {
                 "label": "Desenhar",
-                "textoVisual": "Desenhe o que você está sentindo.",
-                "audio": "audios/zona_azul/Desenhar.m4a",
+                "textoVisual": "DESENHE O QUE VOCÊ ESTÁ SENTINDO.",
+                "audio": "audios/zona_azul/desenhar.m4a",
                 "gif": "imagens/zona_azul/desenhar.png" 
             },
             "ajuda": {
                 "label": "Pedir ajuda",
-                "textoVisual": "Tudo bem pedir ajuda. Estou aqui com você.",
-                "audio": "audios/zona_azul/Ajuda.m4a",
+                "textoVisual": "TUDO BEM PEDIR AJUDA. ESTOU AQUI COM VOCÊ.",
+                "audio": "audios/zona_azul/ajuda.m4a",
                 "gif": "imagens/zona_azul/ajuda.png" 
             },
             "agua": {
                 "label": "Beber água",
-                "textoVisual": "Beba água devagar. Isso ajuda a acalmar.",
-                "audio": "audios/zona_azul/Agua.m4a",
+                "textoVisual": "BEBA ÁGUA DEVAGAR. ISSO AJUDA A ACALMAR.",
+                "audio": "audios/zona_azul/agua.m4a",
                 "gif": "imagens/zona_azul/beber.png" 
             }
         };
@@ -142,7 +142,7 @@
             const orientacao = orientacoes[chave];
             if (!orientacao) return;
             
-            // REGISTRAR NO BANCO DE DADOS DO TCC (app.js)
+            
             if (typeof registrarUsoEstrategia === 'function') {
                 registrarUsoEstrategia(orientacao.label);
             }
@@ -167,13 +167,13 @@
             barra.style.width = '100%'; 
             
             setTimeout(() => {
-                barra.style.transition = 'width 4s linear'; 
+                barra.style.transition = 'width 4.58s linear'; 
                 barra.style.width = '0%'; 
             }, 50);
             
             timerReset = setTimeout(() => {
                 window.location.assign('principal.html');
-            }, 4000); 
+            }, 4580); 
         }
 
         function acaoVoltar() {
