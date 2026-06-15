@@ -42,6 +42,12 @@ O projeto é composto por páginas HTML, arquivos de estilo, scripts JavaScript,
 
 A lógica principal da aplicação está concentrada no arquivo `app.js`, responsável por registrar interações, armazenar dados localmente e gerar visualizações simples para acompanhamento.
 
+## Como executar
+
+Para testar o protótipo, basta abrir o arquivo `index.html` em um navegador compatível.
+
+Como o projeto foi desenvolvido como PWA, algumas funções relacionadas ao cache e ao funcionamento offline podem depender da execução em servidor local. Para isso, é possível utilizar uma extensão como Live Server no Visual Studio Code.
+
 ## Privacidade
 
 O RegulaMente utiliza armazenamento local por meio do LocalStorage. Dessa forma, os dados demonstrativos permanecem no próprio dispositivo e não são enviados para servidores externos.
