@@ -48,6 +48,12 @@ Para testar o protótipo, basta abrir o arquivo `index.html` em um navegador com
 
 Como o projeto foi desenvolvido como PWA, algumas funções relacionadas ao cache e ao funcionamento offline podem depender da execução em servidor local. Para isso, é possível utilizar uma extensão como Live Server no Visual Studio Code.
 
+## Dispositivo recomendado
+
+A interface do RegulaMente foi priorizada para uso em tablets, considerando o contexto escolar e a proposta de funcionamento em modo totem.
+
+Embora o protótipo possa ser aberto em navegadores de desktop e celulares, a melhor experiência de uso ocorre em telas maiores, especialmente em tablets. Ajustes mais completos de responsividade para smartphones estão previstos como melhoria futura.
+
 ## Privacidade
 
 O RegulaMente utiliza armazenamento local por meio do LocalStorage. Dessa forma, os dados demonstrativos permanecem no próprio dispositivo e não são enviados para servidores externos.
