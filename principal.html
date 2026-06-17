@@ -138,6 +138,7 @@
       .pizza-container {
         width: 100%;
         margin: 0 auto;
+        transform: translateY(-12px);
       }
 
       .pizza-container svg {
@@ -296,7 +297,7 @@
           audioAtual.pause();
           audioAtual.currentTime = 0;
         }
-        // Converte para minúsculo para bater com o nome do arquivo
+        
         const nomeArquivo = zona.toLowerCase();
         audioAtual = new Audio(`audios/pizza/zona_${nomeArquivo}.m4a`);
         audioAtual.play().catch(e => console.log("Erro ao tocar áudio:", e));
@@ -315,7 +316,7 @@
           
           tocarAudioZona(zona);
           
-          // Chamar função real de registro do app.js
+          
           if (typeof registrarAcessoZona === 'function') {
             registrarAcessoZona(zona);
           }
@@ -333,7 +334,7 @@
           document.getElementById("titulo-principal").classList.add("titulo-apagado");
           
           setTimeout(() => {
-            // Converte para minúsculo para bater com o nome do arquivo HTML
+            
             window.location.assign(`acoes_${zona.toLowerCase()}.html`);
           }, 1500);
         });

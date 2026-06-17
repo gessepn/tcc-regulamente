@@ -24,7 +24,7 @@
         text-align: center;
       }
 
-      /* SPLASH SCREEN */
+      
       #splash-screen {
         position: fixed;
         inset: 0;
@@ -310,7 +310,7 @@
         }, 2200);
       });
 
-      /* ================= GESTÃO DE MODAIS E SENHAS ================= */
+      
       function abrirModal(id) { document.getElementById(id).style.display = "flex"; }
       
       function fecharModal(id) {
@@ -344,18 +344,18 @@
           abrirModal('modal-admin');
       }
 
-      /* ================= ABRIR RELATÓRIO TCC ================= */
+      
       function abrirRelatorio() {
           fecharModal('modal-admin');
           abrirModal('modal-relatorio');
           
-          // Chama a função real de desenho de gráficos do app.js
+          
           if (typeof desenharGraficosTCC === 'function') {
               desenharGraficosTCC();
           }
       }
 
-      /* ================= GESTÃO DE PERFIS ================= */
+      
       function criarCardPerfil(perfil) {
         const card = document.createElement("div");
         card.className = "perfil-card perfil-dinamico";
@@ -415,11 +415,11 @@
 
       function entrarComo(nome) {
         localStorage.setItem("usuarioAtual", nome);
-        // Uso do assign para garantir compatibilidade com PWA instalado
+       
         window.location.assign("principal.html");
       }
 
-      /* ================= SEGURANÇA E DADOS ================= */
+      
       function mudarPin() {
         const novoPin = document.getElementById("input-pin-novo").value.trim();
         if (!/^\d{4}$/.test(novoPin)) { alert("O PIN precisa ter exatamente 4 números."); return; }
@@ -435,7 +435,7 @@
         const pinCorreto = localStorage.getItem("app_pin") || "1234";
 
         if (pinDigitado === pinCorreto) {
-          // Chama a função de apagar do app.js
+          
           if (typeof apagarHeatmap === 'function') { 
               apagarHeatmap(); 
           }
