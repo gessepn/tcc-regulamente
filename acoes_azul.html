@@ -38,12 +38,13 @@
         
         .controles { margin-top: 30px; display: flex; gap: 15px; }
         .btn-controle { padding: 12px 30px; border-radius: 25px; background-color: #e0e0e0; color: #555; border: 3px solid white; font-size: 16px; font-weight: bold; cursor: pointer; transition: transform 0.2s; }
-        #cadeado { position: fixed; top: 18px; right: 24px; background-color: rgba(0, 0, 0, 0.05); color: #666; padding: 12px 20px; border-radius: 20px; font-size: 15px; font-weight: bold; cursor: pointer; z-index: 100; }
+        #cadeado { position: fixed; top: 18px; right: 24px; background-color: rgba(0, 0, 0, 0.05); color: #666; padding: 12px 20px; border-radius: 20px; font-size: 15px; font-weight: bold; cursor: pointer; z-index: 100; display: flex; align-items: center; gap: 8px; }
+        .icone-voltar { width: 22px; height: 22px; object-fit: contain; }
         .titulo-oculto { opacity: 0; height: 0; margin: 0; overflow: hidden; }
     </style>
 </head>
 <body>
-    <div id="cadeado" onclick="acaoVoltar()">⬅ Voltar 🔒</div>
+    <div id="cadeado" onclick="acaoVoltar()"><img src="imagens/icones/seta-para-a-esquerda.png" class="icone-voltar" alt="">Voltar</div>
     
     <div class="app-container">
         <h1 id="titulo-principal">VOCÊ ESTÁ NA ZONA AZUL<br>TRISTE, CANSADO OU SONOLENTO?<br>O QUE PODE AJUDAR?</h1>
@@ -80,7 +81,7 @@
         </div>
         
         <div class="controles">
-            <button class="btn-controle" id="btn-voltar-manual" onclick="acaoVoltar()" style="opacity: 0.6;">⬅ INÍCIO</button>
+            <button class="btn-controle" id="btn-voltar-manual" onclick="acaoVoltar()" style="opacity: 0.6;">INÍCIO</button>
         </div>
     </div>
 

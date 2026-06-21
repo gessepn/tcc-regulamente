@@ -79,6 +79,7 @@
         display: flex; justify-content: center; align-items: center; font-size: 52px;
         box-shadow: 0 10px 24px rgba(0,0,0,0.06); transition: all 0.25s; margin-bottom: 15px;
       }
+      .avatar-img { width: 68px; height: 68px; object-fit: contain; display: block; }
       .perfil-card:hover .avatar { transform: translateY(-3px); }
       .nome { color: #4a5568; font-size: 18px; font-weight: bold; }
 
@@ -90,6 +91,7 @@
         position: fixed; top: 18px; right: 24px; background-color: rgba(0, 0, 0, 0.06); color: #5b6470;
         padding: 12px 20px; border-radius: 22px; font-size: 15px; font-weight: bold; cursor: pointer; z-index: 100;
       }
+      .inline-icon { width: 22px; height: 22px; object-fit: contain; vertical-align: middle; margin-right: 8px; }
 
       .modal-overlay {
         display: none; position: fixed; inset: 0; background: rgba(14, 28, 43, 0.7);
@@ -110,6 +112,38 @@
       input, select {
         width: 100%; padding: 12px; margin-bottom: 12px; border-radius: 10px; border: 1px solid #cbd5e0;
         box-sizing: border-box; font-size: 16px; font-family: inherit;
+      }
+
+      .avatar-picker {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+        margin-bottom: 12px;
+      }
+      .avatar-opcao {
+        border: 2px solid #cbd5e0;
+        background: #fff;
+        border-radius: 14px;
+        padding: 8px;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        color: #4a5568;
+        font-family: inherit;
+        font-weight: bold;
+        font-size: 11px;
+      }
+      .avatar-opcao.selecionado {
+        border-color: #005a9c;
+        background: #e6f2ff;
+        color: #2c5282;
+      }
+      .avatar-opcao img {
+        width: 42px;
+        height: 42px;
+        object-fit: contain;
       }
 
       .lista-gerenciar { display: flex; flex-direction: column; gap: 10px; max-height: 150px; overflow-y: auto; }
@@ -151,7 +185,7 @@
     </style>
   </head>
   <body>
-    <div id="cadeado" onclick="abrirModalPin('painel')">Painel do Professor 🔒</div>
+    <div id="cadeado" onclick="abrirModalPin('painel')">Painel do Professor</div>
 
     <div id="splash-screen">
       <div class="logo-container">
@@ -166,7 +200,7 @@
       <div class="perfis-container" id="lista-perfis">
         
         <div class="perfil-card convidado" onclick="entrarComo('Convidado')">
-          <div class="avatar">👽</div>
+          <div class="avatar"><img src="imagens/icones/mascara-alienigena.png" class="avatar-img" alt="Convidado"></div>
           <div class="nome">CONVIDADO</div>
         </div>
         
@@ -200,13 +234,28 @@
           <div class="admin-block">
             <h3>Cadastrar Novo Aluno</h3>
             <input type="text" id="input-nome" placeholder="Nome da criança" />
-            <select id="select-avatar">
-              <option value="🐶">Cachorrinho</option>
-              <option value="🐱">Gatinho</option>
-              <option value="🦁">Leão</option>
-              <option value="🐸">Sapo</option>
-              <option value="🚀">Foguete</option>
-            </select>
+            <div class="avatar-picker" id="avatar-picker">
+              <button type="button" class="avatar-opcao selecionado" data-avatar="imagens/icones/cachorro.png" onclick="selecionarAvatar(this)">
+                <img src="imagens/icones/cachorro.png" alt="">
+                <span>Cachorro</span>
+              </button>
+              <button type="button" class="avatar-opcao" data-avatar="imagens/icones/gato.png" onclick="selecionarAvatar(this)">
+                <img src="imagens/icones/gato.png" alt="">
+                <span>Gato</span>
+              </button>
+              <button type="button" class="avatar-opcao" data-avatar="imagens/icones/leao.png" onclick="selecionarAvatar(this)">
+                <img src="imagens/icones/leao.png" alt="">
+                <span>Leão</span>
+              </button>
+              <button type="button" class="avatar-opcao" data-avatar="imagens/icones/sapo.png" onclick="selecionarAvatar(this)">
+                <img src="imagens/icones/sapo.png" alt="">
+                <span>Sapo</span>
+              </button>
+              <button type="button" class="avatar-opcao" data-avatar="imagens/icones/foguete.png" onclick="selecionarAvatar(this)">
+                <img src="imagens/icones/foguete.png" alt="">
+                <span>Foguete</span>
+              </button>
+            </div>
             <button class="btn btn-primary" onclick="salvarPerfil()">Criar Perfil</button>
           </div>
 
@@ -218,7 +267,7 @@
           <div class="admin-block">
             <h3>Relatório Acadêmico (TCC)</h3>
             <p style="font-size: 14px; color: #718096; margin-top:0;">Acesse os gráficos e tabelas de heatmap gerados pelo uso do Totem.</p>
-            <button class="btn btn-warning" onclick="abrirRelatorio()">📊 Visualizar Relatório TCC</button>
+            <button class="btn btn-warning" onclick="abrirRelatorio()"><img src="imagens/icones/grafico-preditivo.png" class="inline-icon" alt="">Visualizar Relatório TCC</button>
           </div>
 
           <div class="admin-block">
@@ -238,7 +287,7 @@
 
     <div id="modal-relatorio" class="modal-overlay">
       <div class="modal-box">
-        <h2 style="color: #ed8936;">📊 Relatório de Monitoramento (Heatmap)</h2>
+        <h2 style="color: #ed8936;"><img src="imagens/icones/grafico-preditivo.png" class="inline-icon" alt="">Relatório de Monitoramento (Heatmap)</h2>
         <p style="color: #718096; margin-top: -10px;">Dados comportamentais coletados localmente (PWA Offline).</p>
 
         <div class="bloco-relatorio">
@@ -280,7 +329,7 @@
 
     <div id="modal-confirm-delete" class="modal-overlay">
       <div class="modal-box modal-small">
-        <h2 style="color: #e53e3e;">⚠️ Resetar Dados</h2>
+        <h2 style="color: #e53e3e;">Atenção: Resetar Dados</h2>
         <p>Isso apagará TODOS os gráficos do Relatório do TCC.</p>
         <input type="password" id="input-senha-delete" placeholder="PIN" maxlength="4" style="text-align: center; font-size: 24px; letter-spacing: 5px;">
         <div id="erro-delete" class="erro-msg">PIN Incorreto!</div>
@@ -296,6 +345,25 @@
     <script>
       let perfis = JSON.parse(localStorage.getItem("app_perfis")) || [];
       let acaoPendentePin = null;
+      const avatarLegado = {
+        "\uD83D\uDC36": "imagens/icones/cachorro.png",
+        "\uD83D\uDC31": "imagens/icones/gato.png",
+        "\uD83E\uDD81": "imagens/icones/leao.png",
+        "\uD83D\uDC38": "imagens/icones/sapo.png",
+        "\uD83D\uDE80": "imagens/icones/foguete.png"
+      };
+
+      function caminhoAvatar(valor) {
+        return avatarLegado[valor] || valor || "imagens/icones/usuario.png";
+      }
+
+      function criarImagemAvatar(valor, textoAlt) {
+        const img = document.createElement("img");
+        img.src = caminhoAvatar(valor);
+        img.alt = textoAlt;
+        img.className = "avatar-img";
+        return img;
+      }
 
       window.addEventListener("load", () => {
         renderizarPerfis();
@@ -364,7 +432,7 @@
         const avatar = document.createElement("div");
         avatar.className = "avatar";
         avatar.style.borderColor = "#a8d1a8";
-        avatar.textContent = perfil.avatar;
+        avatar.appendChild(criarImagemAvatar(perfil.avatar, perfil.nome));
 
         const nome = document.createElement("div");
         nome.className = "nome";
@@ -385,16 +453,23 @@
           container.insertBefore(criarCardPerfil(perfil), ancoraNovoPerfil);
           
           const item = document.createElement("div"); item.className = "item-perfil";
-          item.innerHTML = `<span>${perfil.avatar} ${perfil.nome}</span> <button class="btn btn-danger btn-small" onclick="excluirPerfil(${index})">Excluir</button>`;
+          item.innerHTML = `<span><img src="${caminhoAvatar(perfil.avatar)}" class="inline-icon" alt="">${perfil.nome}</span> <button class="btn btn-danger btn-small" onclick="excluirPerfil(${index})">Excluir</button>`;
           listaGerenciar.appendChild(item);
         });
 
         if (perfis.length === 0) { listaGerenciar.innerHTML = `<p style="color:#718096; margin:0;">Nenhum aluno cadastrado.</p>`; }
       }
 
+      function selecionarAvatar(botaoSelecionado) {
+        document.querySelectorAll(".avatar-opcao").forEach((botao) => {
+          botao.classList.toggle("selecionado", botao === botaoSelecionado);
+        });
+      }
+
       function salvarPerfil() {
         const nome = document.getElementById("input-nome").value.trim();
-        const avatar = document.getElementById("select-avatar").value;
+        const avatarSelecionado = document.querySelector(".avatar-opcao.selecionado");
+        const avatar = avatarSelecionado ? avatarSelecionado.dataset.avatar : "imagens/icones/cachorro.png";
 
         if (!nome) { alert("Digite um nome válido."); return; }
         if (perfis.some(p => p.nome.toLowerCase() === nome.toLowerCase())) { alert("Esse nome já está cadastrado."); return; }

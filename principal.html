@@ -47,6 +47,11 @@
         align-items: center;
         gap: 5px;
       }
+      .user-icon {
+        width: 20px;
+        height: 20px;
+        object-fit: contain;
+      }
 
       #tela-intro {
         position: fixed;
@@ -180,7 +185,8 @@
   </head>
   <body oncontextmenu="return false;">
     <div id="btn-sair" onclick="sairPerfil()">
-      <span id="nome-usuario-ativo">👤 Aluno</span>
+      <img src="imagens/icones/usuario.png" class="user-icon" alt="">
+      <span id="nome-usuario-ativo">Aluno</span>
       <span style="font-size: 12px; color: #888; margin-left: 5px">(Trocar)</span>
     </div>
 
@@ -251,7 +257,7 @@
       let audioAtual = null;
 
       const usuarioAtivo = localStorage.getItem("usuarioAtual") || "Convidado";
-      document.getElementById("nome-usuario-ativo").innerText = `👤 ${usuarioAtivo}`;
+      document.getElementById("nome-usuario-ativo").innerText = usuarioAtivo;
 
       function sairPerfil() {
         sessionStorage.removeItem("introVisto");
