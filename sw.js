@@ -1,23 +1,25 @@
-const CACHE_NAME = 'regula-mente-v2';
+const CACHE_NAME = 'regula-mente-v3';
 const ARQUIVOS_CACHE = [
-    './',
-    './index.html',
-    './principal.html',
-    './acoes_amarela.html',
-    './acoes_azul.html',
-    './acoes_verde.html',
-    './acoes_vermelha.html',
-    './app.js',
-    './manifest.json',
-    './imagens/icones/cachorro.png',
-    './imagens/icones/foguete.png',
-    './imagens/icones/gato.png',
-    './imagens/icones/grafico-preditivo.png',
-    './imagens/icones/leao.png',
-    './imagens/icones/mascara-alienigena.png',
-    './imagens/icones/sapo.png',
-    './imagens/icones/seta-para-a-esquerda.png',
-    './imagens/icones/usuario.png'
+    '',
+    'index.html',
+    'principal.html',
+    'acoes_amarela.html',
+    'acoes_azul.html',
+    'acoes_verde.html',
+    'acoes_vermelha.html',
+    'app.js',
+    'manifest.json',
+    'imagens/icone.png',
+    'imagens/icone512.png',
+    'imagens/icones/cachorro.png',
+    'imagens/icones/foguete.png',
+    'imagens/icones/gato.png',
+    'imagens/icones/grafico-preditivo.png',
+    'imagens/icones/leao.png',
+    'imagens/icones/mascara-alienigena.png',
+    'imagens/icones/sapo.png',
+    'imagens/icones/seta-para-a-esquerda.png',
+    'imagens/icones/usuario.png'
 ];
 
 self.addEventListener('install', (event) => {

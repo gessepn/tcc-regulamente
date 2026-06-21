@@ -2,6 +2,7 @@
   "name": "RegulaMente - Zonas de Regulação",
   "short_name": "RegulaMente",
   "start_url": "index.html",
+  "scope": "./",
   "display": "standalone",
   "orientation": "landscape",
   "background_color": "#fefeff",
