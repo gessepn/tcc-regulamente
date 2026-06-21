@@ -2,6 +2,15 @@
 
 Registro simplificado das principais etapas de desenvolvimento do RegulaMente.
 
+## Versão 1.0.1 (Atualização técnica e correção de cache)
+
+Ajustes de infraestrutura da aplicação aplicados na hospedagem atual que passou do netlify para o github pages:
+
+* Correção no Service Worker: Ajuste nos caminhos relativos do array `ARQUIVOS_CACHE` para evitar falhas atômicas no método `cache.addAll()`, garantindo o funcionamento offline do app shell, antes ele nao armazenava o conteúdo e nao funcionava offline;
+* Inclusão de dependências no cache: Adicionados os ícones principais (`icone.png` e `icone512.png`) referenciados no `manifest.json` à lista de arquivos cacheados;
+* Atualização de versão do cache: `CACHE_NAME` alterado para `regula-mente-v3` para forçar os navegadores e dispositivos em modo totem a reinstalarem o Service Worker atualizado, para evitar bug do cache antigo;
+
+
 ## Versão revisada pós-avaliação
 
 Alterações realizadas após a avaliação por especialistas:
@@ -18,7 +27,7 @@ Alterações realizadas após a avaliação por especialistas:
 
 Principais recursos presentes na versão submetida à avaliação:
 
-* tela principal com quatro zonas emocionais;
+* tela principal com quadruplicidade de zonas emocionais;
 * telas de estratégias para as zonas verde, azul, amarela e vermelha;
 * uso de pictogramas ARASAAC;
 * textos curtos associados às imagens;

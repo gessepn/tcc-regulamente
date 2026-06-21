@@ -1,6 +1,6 @@
 const CACHE_NAME = 'regula-mente-v3';
 const ARQUIVOS_CACHE = [
-    '',
+    './',
     'index.html',
     'principal.html',
     'acoes_amarela.html',
