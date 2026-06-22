@@ -7,8 +7,9 @@ Registro simplificado das principais etapas de desenvolvimento do RegulaMente.
 Correções aplicadas nas telas de estratégias para melhorar a reprodução dos áudios no app que não estavam carregando direito:
 
 * inclusão dos arquivos de áudio das estratégias no cache do Service Worker;
-* atualização do cache para `regula-mente-v5`, forçando a instalação da nova versão nos dispositivos;
+* atualização do cache para `regula-mente-v6`, forçando a instalação da nova versão nos dispositivos;
 * suporte a requisições parciais de áudio (`Range`) no Service Worker, melhorando a reprodução em modo PWA/offline;
+* padronização dos nomes dos arquivos de áudio em letras minúsculas para evitar erro 404 no GitHub Pages;
 * melhoria no log de erro da reprodução de áudio, exibindo o caminho do arquivo que falhar.
 
 ## Versão 1.0.1 (Atualização técnica, correção de cache e design)

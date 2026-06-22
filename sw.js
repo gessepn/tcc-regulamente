@@ -1,4 +1,4 @@
-const CACHE_NAME = 'regula-mente-v5';
+const CACHE_NAME = 'regula-mente-v6';
 const ARQUIVOS_CACHE = [
     './',
     'index.html',
