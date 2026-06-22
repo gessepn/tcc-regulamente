@@ -19,7 +19,7 @@ Ajustes de infraestrutura da aplicação aplicados na hospedagem atual que passo
 * Correção no Service Worker: Ajuste nos caminhos relativos do array `ARQUIVOS_CACHE` para evitar falhas atômicas no método `cache.addAll()`, garantindo o funcionamento offline do app shell (antes ele não armazenava o conteúdo e não funcionava offline);
 * Inclusão de dependências no cache: Adicionados os ícones principais (`icone.png` e `icone512.png`) referenciados no `manifest.json` à lista de arquivos cacheados;
 * Otimização de Design do Ícone: Substituição dos arquivos de imagem por versões mascaráveis com cantos retos e fundo plano, eliminando o erro visual de dupla borda ("quadrado dentro de quadrado") na interface nativa de tablets;
-* Atualização de versão do cache: `CACHE_NAME` alterado para `regula-mente-v4` para forçar os navegadores e dispositivos em modo totem a reinstalarem o Service Worker atualizado, limpando de forma definitiva os bugs de cache das versões anteriores (`v2` e `v3`).
+* Atualização de versão do cache: `CACHE_NAME` alterado para `regula-mente-v6` para forçar os navegadores e dispositivos em modo totem a reinstalarem o Service Worker atualizado, limpando de forma definitiva os bugs de cache das versões anteriores (`v2`, `v3`, `v4`, `v5`).
 
 
 ## Versão revisada pós-avaliação
