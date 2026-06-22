@@ -136,7 +136,8 @@
                 audioAtual.currentTime = 0;
             }
             audioAtual = new Audio(caminhoArquivo);
-            audioAtual.play().catch(erro => console.error("Erro no áudio:", erro));
+            audioAtual.preload = 'auto';
+            audioAtual.play().catch(erro => console.error("Erro no áudio:", caminhoArquivo, erro));
         }
 
         function selecionarAcao(chave, botaoClicado) {
@@ -168,13 +169,13 @@
             barra.style.width = '100%'; 
             
             setTimeout(() => {
-                barra.style.transition = 'width 4.58s linear'; 
+                barra.style.transition = 'width 8s linear'; 
                 barra.style.width = '0%'; 
             }, 50);
             
             timerReset = setTimeout(() => {
                 window.location.assign('principal.html');
-            }, 4580); 
+            }, 8000); 
         }
 
         function acaoVoltar() {

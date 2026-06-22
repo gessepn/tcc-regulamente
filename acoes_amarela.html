@@ -137,7 +137,8 @@
                 audioAtual.currentTime = 0;
             }
             audioAtual = new Audio(caminhoArquivo);
-            audioAtual.play().catch(erro => console.error("Erro no áudio:", erro));
+            audioAtual.preload = 'auto';
+            audioAtual.play().catch(erro => console.error("Erro no áudio:", caminhoArquivo, erro));
         }
 
         function selecionarAcao(chave, botaoClicado) {
