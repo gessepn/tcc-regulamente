@@ -298,7 +298,7 @@
         }
       }
 
-      function tocarAudioZona(zona) {
+      function tocarAudioZona(zona, aoTerminar) {
         if (audioAtual) {
           audioAtual.pause();
           audioAtual.currentTime = 0;
@@ -306,6 +306,8 @@
         
         const nomeArquivo = zona.toLowerCase();
         audioAtual = new Audio(`audios/pizza/zona_${nomeArquivo}.m4a`);
+        audioAtual.preload = "auto";
+        audioAtual.addEventListener("ended", aoTerminar, { once: true });
         audioAtual.play().catch(e => console.log("Erro ao tocar áudio:", e));
       }
 
@@ -320,7 +322,14 @@
           if (travado) return;
           travado = true;
           
-          tocarAudioZona(zona);
+          let navegou = false;
+          const navegarParaEstrategias = () => {
+            if (navegou) return;
+            navegou = true;
+            window.location.assign(`acoes_${zona.toLowerCase()}.html`);
+          };
+
+          tocarAudioZona(zona, navegarParaEstrategias);
           
           
           if (typeof registrarAcessoZona === 'function') {
@@ -339,10 +348,7 @@
           
           document.getElementById("titulo-principal").classList.add("titulo-apagado");
           
-          setTimeout(() => {
-            
-            window.location.assign(`acoes_${zona.toLowerCase()}.html`);
-          }, 1500);
+          setTimeout(navegarParaEstrategias, 10000);
         });
       });
     </script>
